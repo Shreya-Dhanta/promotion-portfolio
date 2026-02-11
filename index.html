@@ -129,7 +129,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--surface-2);color:
 body.presentation .sidebar,body.presentation .sidebar-toggle,body.presentation .theme-toggle,body.presentation .pres-toggle,body.presentation .scroll-progress,body.presentation .progress-dots,body.presentation .top-controls{display:none!important}
 body.presentation .main{margin-left:0!important}
 body.presentation .hero-timeline{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding-top:0;padding-bottom:0}
-body.presentation .hero-header{padding-top:40px;padding-bottom:20px}
+body.presentation .hero-header{padding-top:0;padding-bottom:10px}
 /* Presentation mode - keep same as normal view */
 body.presentation .scroll-hint{display:none}
 body.presentation .sec{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:40px}
@@ -243,7 +243,7 @@ nav.sn .ng{padding:16px 14px 8px;font-size:.72rem;font-weight:700;text-transform
 /* 3D Realistic Bubble Cards - Large with Content */
 .summary-cards{display:flex;gap:25px;padding:40px 40px;justify-content:center;flex-wrap:wrap;position:relative;z-index:2}
 .summary-card{
-  width:320px;height:320px;border-radius:50%;
+  width:360px;height:360px;border-radius:50%;
   background:
     radial-gradient(circle at 20% 20%, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.4) 8%, transparent 20%),
     radial-gradient(circle at 80% 80%, rgba(255,255,255,0.15) 0%, transparent 25%),
@@ -293,22 +293,23 @@ nav.sn .ng{padding:16px 14px 8px;font-size:.72rem;font-weight:700;text-transform
     inset 0 0 100px rgba(255,255,255,0.15);
   border-color:rgba(255,255,255,0.6)
 }
-.summary-icon{font-size:2.2rem;margin-bottom:6px;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.2))}
-.summary-card h3{color:#fff;font-size:0.7rem;font-weight:800;letter-spacing:1px;margin-bottom:8px;text-transform:uppercase;text-shadow:0 2px 8px rgba(0,0,0,0.4)}
+.summary-icon{font-size:2.5rem;margin-bottom:8px;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.3))}
+.summary-card h3{color:#fff;font-size:0.85rem;font-weight:800;letter-spacing:1px;margin-bottom:12px;text-transform:uppercase;text-shadow:0 2px 10px rgba(0,0,0,0.5)}
 .summary-card .card-list{
-  list-style:none;padding:0;margin:0;text-align:left;width:100%;max-width:220px
+  list-style:none;padding:0;margin:0;text-align:left;width:100%;max-width:260px
 }
 .summary-card .card-list li{
-  color:rgba(255,255,255,0.95);font-size:0.72rem;line-height:1.4;
-  padding:3px 0 3px 14px;position:relative
+  color:#fff;font-size:0.82rem;line-height:1.5;
+  padding:4px 0 4px 16px;position:relative;
+  text-shadow:0 1px 4px rgba(0,0,0,0.4)
 }
 .summary-card .card-list li::before{
-  content:'•';position:absolute;left:0;color:#a7f3d0;font-weight:bold
+  content:'•';position:absolute;left:0;color:#a7f3d0;font-weight:bold;text-shadow:none
 }
 .summary-footer{
-  color:#a7f3d0;font-size:0.72rem;font-weight:700;margin-top:10px;
-  text-shadow:0 2px 6px rgba(0,0,0,0.3);padding:5px 14px;
-  background:rgba(0,0,0,0.15);border-radius:20px
+  color:#a7f3d0;font-size:0.8rem;font-weight:700;margin-top:12px;
+  text-shadow:0 2px 6px rgba(0,0,0,0.4);padding:6px 16px;
+  background:rgba(0,0,0,0.2);border-radius:20px
 }
 [data-theme="dark"] .summary-card{
   background:
@@ -482,9 +483,9 @@ nav.sn .ng{padding:16px 14px 8px;font-size:.72rem;font-weight:700;text-transform
   .timeline-container{padding:40px 30px}
   .pg,.sg{grid-template-columns:1fr}
   .summary-cards{gap:20px;padding:40px 20px}
-  .summary-card{width:280px;height:280px;padding:30px 25px}
-  .summary-card .card-list li{font-size:0.68rem}
-  .summary-icon{font-size:1.8rem}
+  .summary-card{width:320px;height:320px;padding:35px 28px}
+  .summary-card .card-list li{font-size:0.75rem}
+  .summary-icon{font-size:2.2rem}
 }
 @media(max-width:1100px){
   .timeline{gap:20px}
@@ -513,11 +514,11 @@ nav.sn .ng{padding:16px 14px 8px;font-size:.72rem;font-weight:700;text-transform
   .top-controls{top:auto;bottom:16px;right:16px}
   .c-left,.c-right,.c-full,.c-img,.c-tix{padding-left:20px;padding-right:20px}
   .summary-cards{gap:15px;padding:30px 15px}
-  .summary-card{width:260px;height:260px;padding:25px 20px}
-  .summary-card .card-list li{font-size:0.65rem;padding:2px 0 2px 10px}
-  .summary-card h3{font-size:0.6rem}
-  .summary-icon{font-size:1.6rem;margin-bottom:4px}
-  .summary-footer{font-size:0.6rem;padding:3px 8px}
+  .summary-card{width:300px;height:300px;padding:28px 22px}
+  .summary-card .card-list li{font-size:0.72rem;padding:3px 0 3px 14px}
+  .summary-card h3{font-size:0.75rem}
+  .summary-icon{font-size:2rem;margin-bottom:6px}
+  .summary-footer{font-size:0.7rem;padding:5px 12px}
 }
 </style>
 </head>
@@ -748,9 +749,12 @@ nav.sn .ng{padding:16px 14px 8px;font-size:.72rem;font-weight:700;text-transform
           <li><strong>Blueprint for future enterprise deals</strong> – Success demonstrates replicable sales strategy for landing similar high-value customers with supply chain visibility needs</li>
         </ul>
         <div class="rv">💎 $252K Lactalis deal enabled</div>
+        <div class="ib" style="margin-top:16px">
+          <h4>💬 Stakeholder Feedback</h4>
+          <p style="font-size:.9rem;color:var(--text-2);line-height:1.6;">Avinash Rajan confirmed that Lactalis is very satisfied with the short-shipped Pipedream feature and considers it a key capability they're paying for in their contract.</p>
+        </div>
       </div>
     </div>
-    <div class="c-img"><div class="ig g1"><div class="gi" onclick="openLightbox(this)"><img src="pipedream 1.png" alt="Pipedream"></div></div></div>
     <div class="c-tix"><a class="tx" href="https://fourkites.atlassian.net/browse/OV-4536" target="_blank">OV-4536</a><a class="tx" href="https://fourkites.atlassian.net/browse/OV-4845" target="_blank">OV-4845</a><a class="tx" href="https://fourkites.atlassian.net/browse/OV-4894" target="_blank">OV-4894</a></div>
   </div>
 </section>
@@ -795,7 +799,7 @@ nav.sn .ng{padding:16px 14px 8px;font-size:.72rem;font-weight:700;text-transform
         <ul class="dl">
           <li><strong>Event-driven processing</strong> – Kafka consumer listens to ois-fields-actions topic and routes messages to appropriate callback service based on message type (ORDER_CREATED, ORDER_UPDATED, DELIVERY_ETA_CHANGED)</li>
           <li><strong>Callback payload construction</strong> – Builds comprehensive OrderCallbacksDTO with order details, line items, delivery locations, current/previous ETA values, and shipment attributes</li>
-          <li><strong>Protobuf serialization</strong> – Converts callback payload to NotificationsWorkerCallbackMessage protobuf format and sends to company-specific Kafka topic for external consumption</li>
+          <li><strong>Message structure setup</strong> – Used existing environment configuration to add proto files that define the callback message structure, enabling seamless integration with the notification system</li>
           <li><strong>Retry with consistency checks</strong> – Validates updated_at timestamp (±100ms tolerance) against read replica, triggers exponential backoff retry (500ms → 4s, max 3 attempts) when replication lag detected</li>
           <li><strong>Feature flag gating</strong> – Checks shouldSendCallbackMessage(companyId) before sending, enabling per-company callback control without deployment</li>
         </ul>
@@ -809,9 +813,12 @@ nav.sn .ng{padding:16px 14px 8px;font-size:.72rem;font-weight:700;text-transform
           <li><strong>Reliable delivery guarantee</strong> – 3-attempt retry with exponential backoff ensures callbacks reach external systems even during transient network or database issues</li>
         </ul>
         <div class="rv">💎 $55K SCJ deal enabled</div>
+        <div class="ib" style="margin-top:16px">
+          <h4>🤝 Customer Engagement</h4>
+          <p style="font-size:.9rem;color:var(--text-2);line-height:1.6;">Actively joined customer enablement calls to provide technical support and was always ready to help unblock customers during their onboarding and integration process.</p>
+        </div>
       </div>
     </div>
-    <div class="c-img"><div class="ig g2"><div class="gi" onclick="openLightbox(this)"><img src="callback.png" alt="Callback 1"></div><div class="gi" onclick="openLightbox(this)"><img src="callback2.png" alt="Callback 2"></div></div></div>
     <div class="c-tix"><a class="tx" href="https://fourkites.atlassian.net/browse/OV-4766" target="_blank">OV-4766</a><a class="tx" href="https://fourkites.atlassian.net/browse/OV-4433" target="_blank">OV-4433</a></div>
   </div>
 </section>
@@ -838,6 +845,10 @@ nav.sn .ng{padding:16px 14px 8px;font-size:.72rem;font-weight:700;text-transform
           <li><strong>Fixed parallel shipment status conflicts</strong> – For customers using split shipments or multiple carriers for single deliveries, ensuring delivery status reflects actual fulfillment state</li>
           <li><strong>Improved ETA accuracy</strong> – By aggregating ETAs across all shipments and selecting latest arrival time, enabling customers to set accurate expectations</li>
         </ul>
+        <div class="ib" style="margin-top:16px">
+          <h4>⭐ Key Achievement</h4>
+          <p style="font-size:.9rem;color:var(--text-2);line-height:1.6;">This was one of the important and complex features in Order Visibility, requiring careful handling of multiple edge cases. Delivered responsibly with thorough testing and attention to data accuracy.</p>
+        </div>
       </div>
     </div>
     <div class="c-tix"><a class="tx" href="https://fourkites.atlassian.net/browse/OV-4931" target="_blank">OV-4931</a></div>
@@ -897,9 +908,13 @@ nav.sn .ng{padding:16px 14px 8px;font-size:.72rem;font-weight:700;text-transform
       <li><strong>User experience bugs fixed</strong> – Ensuring seamless workflows across dashboard navigation, order listing, and line item views without customer-facing disruptions</li>
       <li><strong>Production monitoring kept functional</strong> – Through pager and metrics fixes, enabling rapid incident response and maintaining >90% uptime SLA for enterprise customers</li>
       <li><strong>Beyond official ticket resolution</strong> – Focused on reducing technical debt by fixing undocumented bugs and streamlining backend logic, resulting in a more resilient production environment</li>
-    </ul></div>
+    </ul>
+    <div class="ib" style="margin-top:16px">
+      <h4>🛡️ Ownership & Responsibility</h4>
+      <p style="font-size:.9rem;color:var(--text-2);line-height:1.6;">Always stepped up to resolve production issues with utmost responsibility, ensuring minimal customer impact and quick turnaround times.</p>
+    </div>
+    </div>
   </div>
-  <div class="c-img"><div class="ig g1"><div class="gi" onclick="openLightbox(this)"><img src="Defects - Production Bug Resolution.png" alt="Defects"></div></div></div>
   <div class="c-tix"><a class="tx" href="https://fourkites.atlassian.net/browse/OV-5242" target="_blank">OV-5242</a><a class="tx" href="https://fourkites.atlassian.net/browse/OV-5272" target="_blank">OV-5272</a><a class="tx" href="https://fourkites.atlassian.net/browse/OV-5158" target="_blank">OV-5158</a><a class="tx" href="https://fourkites.atlassian.net/browse/OV-4890" target="_blank">OV-4890</a><a class="tx" href="https://fourkites.atlassian.net/browse/OV-4775" target="_blank">OV-4775</a><a class="tx" href="https://fourkites.atlassian.net/browse/OV-4769" target="_blank">OV-4769</a><a class="tx" href="https://fourkites.atlassian.net/browse/OV-4609" target="_blank">OV-4609</a><a class="tx" href="https://fourkites.atlassian.net/browse/OV-4568" target="_blank">OV-4568</a><a class="tx" href="https://fourkites.atlassian.net/browse/OV-4450" target="_blank">OV-4450</a></div>
   </div>
 </section>
@@ -921,7 +936,7 @@ nav.sn .ng{padding:16px 14px 8px;font-size:.72rem;font-weight:700;text-transform
     <div class="c-right"><h3>Impact & Results</h3><ul class="dl">
       <li><strong>Optimized Message Volume</strong> – Message rates decreased from ~1,000/sec to ~10/sec (99% reduction), eliminating processing lags completely</li>
       <li><strong>Improved Stability</strong> – Service running smoothly without frequent lags, eliminating need for manual intervention and restarts</li>
-      <li><strong>Customer Impact Resolution</strong> – Prior to this change, Meijer repeatedly complained about pipeline lags. After implementing the fix, lags completely vanished and Meijer stopped complaining</li>
+      <li><strong>Customer Impact Resolution</strong> – Multiple customers were experiencing pipeline lags, with Meijer being most affected due to their high data volumes. After implementing the fix, lags completely vanished across all customers, resulting in a significant improvement for the entire platform</li>
       <li><strong>Zero Database Alerts</strong> – No alerts with respect to DB after Inventory producer message change release for 16+ consecutive days</li>
       <li><strong>Top Consumer Eliminated</strong> – The top consumer query (Calls/sec and Rows/sec) is now zero - previously causing significant database load</li>
       <li><strong>Resource Efficiency</strong> – Dramatically reduced resource consumption and memory by not loading large collections unnecessarily</li>
@@ -1094,7 +1109,7 @@ nav.sn .ng{padding:16px 14px 8px;font-size:.72rem;font-weight:700;text-transform
       <li><strong>Enabled independent sales demos</strong> – Created demo environments allowing sales team to run customer meetings without engineering presence</li>
     </ul></div>
   </div>
-  <div class="c-img"><div class="ig g2"><div class="gi" onclick="openLightbox(this)"><img src="Demo Data Support.png" alt="Demo 1"></div><div class="gi" onclick="openLightbox(this)"><img src="Demo Data Support2.png" alt="Demo 2"></div><div class="gi" onclick="openLightbox(this)"><img src="Demo Data Support3.png" alt="Demo 3"></div><div class="gi" onclick="openLightbox(this)"><img src="Demo Data Support4.png" alt="Demo 4"></div></div></div>
+  <div class="c-img"><div class="ig g2"><div class="gi" onclick="openLightbox(this)"><img src="Demo Data Support.png" alt="Demo 1"></div><div class="gi" onclick="openLightbox(this)"><img src="Demo Data Support2.png" alt="Demo 2"></div><div class="gi" onclick="openLightbox(this)"><img src="Demo Data Support4.png" alt="Demo 4"></div></div></div>
   <div class="c-tix"><a class="tx" href="https://fourkites.atlassian.net/browse/OV-4994" target="_blank">OV-4994</a><a class="tx" href="https://fourkites.atlassian.net/browse/OV-4867" target="_blank">OV-4867</a><a class="tx" href="https://fourkites.atlassian.net/browse/OV-4798" target="_blank">OV-4798</a><a class="tx" href="https://fourkites.atlassian.net/browse/OV-4768" target="_blank">OV-4768</a><a class="tx" href="https://fourkites.atlassian.net/browse/OV-4664" target="_blank">OV-4664</a><a class="tx" href="https://fourkites.atlassian.net/browse/OV-4615" target="_blank">OV-4615</a></div>
   </div>
 </section>
@@ -1241,7 +1256,7 @@ nav.sn .ng{padding:16px 14px 8px;font-size:.72rem;font-weight:700;text-transform
       <li><strong>Maintained team momentum</strong> – Self-unblocking approach kept work moving forward without waiting for senior availability during busy periods</li>
     </ul></div>
   </div>
-  <div class="c-img"><div class="ig g1"><div class="gi" onclick="openLightbox(this)"><img src="Autonomy%20Guidance.png" alt="Autonomy 1"></div><div class="gi" onclick="openLightbox(this)"><img src="Autonomy%20Guidance2.png" alt="Autonomy 2"></div><div class="gi" onclick="openLightbox(this)"><img src="Autonomy%20Guidance3.png" alt="Autonomy 3"></div></div></div>
+  <div class="c-img"><div class="ig g1"><div class="gi" onclick="openLightbox(this)"><img src="Autonomy%20Guidance2.png" alt="Autonomy 2"></div><div class="gi" onclick="openLightbox(this)"><img src="Autonomy%20Guidance3.png" alt="Autonomy 3"></div></div></div>
   </div>
 </section>
 
@@ -1323,19 +1338,13 @@ nav.sn .ng{padding:16px 14px 8px;font-size:.72rem;font-weight:700;text-transform
         <li><strong>Cross-Team Collaboration</strong> – Worked with TMS, Platform, Frontend teams seamlessly</li>
         <li><strong>Onboarding Support</strong> – Helped new members ramp up on OV architecture</li>
         <li><strong>Code Walkthroughs</strong> – Conducted knowledge transfer sessions</li>
-        <li><strong>PO Connect</strong> – Bridged communication between teams for integration</li>
+        <li><strong>PO Connect</strong> – Was the point of contact for demo creation and support for integration</li>
       </ul></div>
       <div class="sc"><h4>😊 Attitude Matters</h4><ul class="dl">
         <li><strong>Always Volunteered</strong> – First to raise hand for sprint demos and presentations</li>
         <li><strong>100% On-Time</strong> – Zero missed deadlines across all features and demos</li>
         <li><strong>Positive Under Pressure</strong> – Delivered Dynamic Status (4 modules) with zero bugs</li>
         <li><strong>Growth Mindset</strong> – Embraced AI tools to boost productivity 40%</li>
-      </ul></div>
-      <div class="sc"><h4>💡 Innovation</h4><ul class="dl">
-        <li><strong>AI Code Guardian</strong> – Hackathon project for automated PR reviews</li>
-        <li><strong>CQRS Architecture</strong> – Introduced pattern that became team reference</li>
-        <li><strong>Protobuf Adoption</strong> – 40% payload reduction through modern serialization</li>
-        <li><strong>AI Productivity</strong> – Pioneered Cursor + Claude for 40% efficiency gains</li>
       </ul></div>
     </div></div>
   </div>
@@ -1548,6 +1557,25 @@ function updatePresCounter(){
   document.getElementById('presCounter').textContent=currentSlide+1;
   document.getElementById('presTotal').textContent=slides.length;
 }
+
+// Update slide counter on scroll in presentation mode
+window.addEventListener('scroll',()=>{
+  if(!isPresentation) return;
+  const viewportHeight = window.innerHeight;
+  for(let i=0; i<slides.length; i++){
+    const el = document.getElementById(slides[i]);
+    if(el){
+      const rect = el.getBoundingClientRect();
+      if(rect.top <= viewportHeight/2 && rect.bottom >= viewportHeight/2){
+        if(currentSlide !== i){
+          currentSlide = i;
+          updatePresCounter();
+        }
+        break;
+      }
+    }
+  }
+});
 
 document.getElementById('presToggle').addEventListener('click',togglePresentation);
 
