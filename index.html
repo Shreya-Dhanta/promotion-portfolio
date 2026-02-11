@@ -11,146 +11,171 @@
 --acc:#7c3aed;--acc-l:#ede9fe;
 --g50:#f8fafc;--g100:#f1f5f9;--g200:#e2e8f0;--g300:#cbd5e1;--g400:#94a3b8;--g500:#64748b;--g600:#475569;--g700:#334155;--g800:#1e293b;--g900:#0f172a;
 --grn:#059669;--grn-l:#d1fae5;--amb:#d97706;--amb-l:#fef3c7;--red:#dc2626;--red-l:#fee2e2;
---side-w:280px;--rad:12px;--rad-sm:8px;--shadow:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.06);
---shadow-md:0 4px 6px rgba(0,0,0,.07),0 2px 4px rgba(0,0,0,.05);
---shadow-lg:0 10px 25px rgba(0,0,0,.08),0 4px 10px rgba(0,0,0,.04);
+--side-w:264px;--rad:12px;--rad-sm:8px;
+--shadow:0 1px 3px rgba(0,0,0,.08);--shadow-md:0 4px 12px rgba(0,0,0,.07);
 }
 html{scroll-behavior:smooth;font-size:15px}
 body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--g50);color:var(--g800);line-height:1.7;overflow-x:hidden}
 
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(37,99,235,.3)}50%{box-shadow:0 0 20px 4px rgba(37,99,235,.15)}}
+@keyframes glow{0%,100%{box-shadow:0 0 8px rgba(217,119,6,.2)}50%{box-shadow:0 0 20px rgba(217,119,6,.4)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes nodeAppear{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes lineDraw{from{width:0}to{width:100%}}
+@keyframes countUp{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}.reveal.visible{opacity:1;transform:translateY(0)}
+
 /* SIDEBAR */
 .sidebar{position:fixed;top:0;left:0;width:var(--side-w);height:100vh;background:#fff;border-right:1px solid var(--g200);z-index:100;display:flex;flex-direction:column;overflow-y:auto;transition:transform .3s}
-.sidebar::-webkit-scrollbar{width:4px}
-.sidebar::-webkit-scrollbar-thumb{background:var(--g300);border-radius:4px}
-.side-head{padding:24px 20px 16px;border-bottom:1px solid var(--g200);text-align:center;flex-shrink:0}
-.side-head .pill{display:inline-block;background:linear-gradient(135deg,var(--pri),var(--acc));color:#fff;font-size:.7rem;font-weight:700;padding:4px 14px;border-radius:20px;letter-spacing:.6px;text-transform:uppercase;margin-bottom:10px}
-.side-head h2{font-size:1.15rem;color:var(--g900);font-weight:800;letter-spacing:-.3px}
-.side-head p{font-size:.72rem;color:var(--g500);margin-top:2px}
-.side-nav{flex:1;padding:10px 0;overflow-y:auto}
-.side-nav a{display:flex;align-items:center;gap:10px;padding:9px 20px;font-size:.78rem;color:var(--g600);text-decoration:none;border-left:3px solid transparent;transition:all .15s;font-weight:500}
+.sidebar::-webkit-scrollbar{width:3px}.sidebar::-webkit-scrollbar-thumb{background:var(--g300);border-radius:4px}
+.side-head{padding:20px 16px 14px;border-bottom:1px solid var(--g200);text-align:center;flex-shrink:0}
+.side-head .pill{display:inline-block;background:linear-gradient(135deg,var(--pri),var(--acc));color:#fff;font-size:.66rem;font-weight:700;padding:3px 13px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase;margin-bottom:7px}
+.side-head h2{font-size:1.05rem;color:var(--g900);font-weight:800}
+.side-head p{font-size:.68rem;color:var(--g500);margin-top:2px}
+.side-nav{flex:1;padding:6px 0;overflow-y:auto}
+.side-nav a{display:flex;align-items:center;gap:8px;padding:6px 16px;font-size:.74rem;color:var(--g600);text-decoration:none;border-left:3px solid transparent;transition:all .15s;font-weight:500}
 .side-nav a:hover{background:var(--pri-xl);color:var(--pri);border-left-color:var(--pri-l)}
 .side-nav a.active{background:var(--pri-l);color:var(--pri-d);border-left-color:var(--pri);font-weight:700}
-.side-nav a .ico{width:20px;text-align:center;font-size:.85rem;flex-shrink:0}
-.side-nav .nav-group{padding:6px 20px 4px;font-size:.62rem;font-weight:700;color:var(--g400);text-transform:uppercase;letter-spacing:1px;margin-top:6px}
-.burger{display:none;position:fixed;top:14px;left:14px;z-index:200;background:#fff;border:1px solid var(--g200);border-radius:var(--rad-sm);padding:8px 10px;cursor:pointer;box-shadow:var(--shadow)}
-.burger span{display:block;width:20px;height:2px;background:var(--g700);margin:4px 0;border-radius:2px;transition:all .2s}
+.side-nav a .ico{width:16px;text-align:center;font-size:.78rem;flex-shrink:0}
+.side-nav .nav-group{padding:5px 16px 2px;font-size:.58rem;font-weight:700;color:var(--g400);text-transform:uppercase;letter-spacing:.8px;margin-top:3px}
+.burger{display:none;position:fixed;top:12px;left:12px;z-index:200;background:#fff;border:1px solid var(--g200);border-radius:var(--rad-sm);padding:7px 9px;cursor:pointer;box-shadow:var(--shadow)}
+.burger span{display:block;width:18px;height:2px;background:var(--g700);margin:3px 0;border-radius:2px}
 
-/* MAIN */
 .main{margin-left:var(--side-w);min-height:100vh}
 
 /* HERO */
-.hero{background:linear-gradient(135deg,#1e3a5f 0%,#2563eb 50%,#7c3aed 100%);color:#fff;padding:70px 48px 50px;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-50%;right:-20%;width:600px;height:600px;background:radial-gradient(circle,rgba(255,255,255,.06) 0%,transparent 70%);border-radius:50%}
-.hero::after{content:'';position:absolute;bottom:-30%;left:-10%;width:400px;height:400px;background:radial-gradient(circle,rgba(124,58,237,.15) 0%,transparent 70%);border-radius:50%}
-.hero>*{position:relative;z-index:1}
-.hero .tag{display:inline-block;background:rgba(255,255,255,.15);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);padding:5px 16px;border-radius:20px;font-size:.72rem;font-weight:600;letter-spacing:.5px;margin-bottom:18px}
-.hero h1{font-size:2.2rem;font-weight:800;letter-spacing:-.5px;line-height:1.2;margin-bottom:6px}
-.hero .name{font-size:1.1rem;font-weight:600;opacity:.92;margin-bottom:4px}
-.hero .role{font-size:.82rem;opacity:.72;margin-bottom:32px}
-.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
-.met{background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.15);border-radius:var(--rad);padding:18px 16px;text-align:center}
-.met .num{font-size:1.55rem;font-weight:800;line-height:1.1}
-.met .lbl{font-size:.68rem;opacity:.75;margin-top:4px;line-height:1.3}
+.hero{background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 30%,#2563eb 65%,#7c3aed 100%);color:#fff;padding:56px 40px 40px;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.hero-bg .orb{position:absolute;border-radius:50%;filter:blur(60px);opacity:.12}
+.hero-bg .orb1{width:400px;height:400px;background:#7c3aed;top:-100px;right:-80px;animation:float 8s ease-in-out infinite}
+.hero-bg .orb2{width:300px;height:300px;background:#2563eb;bottom:-80px;left:-60px;animation:float 6s ease-in-out infinite 1s}
+.hero-bg .orb3{width:200px;height:200px;background:#06b6d4;top:50%;left:50%;animation:float 10s ease-in-out infinite 2s}
+.hero .grid-overlay{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
+.hero>*:not(.hero-bg):not(.grid-overlay){position:relative;z-index:1}
+.hero .tag{display:inline-block;background:rgba(255,255,255,.1);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.15);padding:4px 14px;border-radius:20px;font-size:.68rem;font-weight:600;letter-spacing:.5px;margin-bottom:12px;animation:fadeIn .8s ease}
+.hero h1{font-size:2rem;font-weight:800;letter-spacing:-.5px;line-height:1.15;margin-bottom:5px;animation:fadeUp .8s ease}
+.hero .name{font-size:1.02rem;font-weight:600;opacity:.9;margin-bottom:2px;animation:fadeUp .8s ease .1s both}
+.hero .role{font-size:.78rem;opacity:.7;margin-bottom:26px;animation:fadeUp .8s ease .2s both}
+
+/* 3D METRIC CARDS */
+.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:11px}
+.met{background:rgba(255,255,255,.07);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.12);border-radius:var(--rad);padding:16px 12px;text-align:center;transition:transform .3s,box-shadow .3s;cursor:default;animation:fadeUp .6s ease both;position:relative;overflow:hidden}
+.met::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.1),transparent);opacity:0;transition:opacity .3s}
+.met:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 12px 30px rgba(0,0,0,.2)}.met:hover::before{opacity:1}
+.met:nth-child(1){animation-delay:.1s}.met:nth-child(2){animation-delay:.2s}.met:nth-child(3){animation-delay:.3s}.met:nth-child(4){animation-delay:.4s}.met:nth-child(5){animation-delay:.5s}
+.met .num{font-size:1.4rem;font-weight:800;line-height:1.1;font-variant-numeric:tabular-nums}
+.met .lbl{font-size:.64rem;opacity:.72;margin-top:3px;line-height:1.3}
+
+/* TIMELINE */
+.timeline-section{background:linear-gradient(180deg,#fff 0%,var(--g50) 100%);padding:36px 40px 28px;border-bottom:1px solid var(--g200)}
+.timeline-title{text-align:center;font-size:1.1rem;font-weight:800;color:var(--g900);margin-bottom:4px}
+.timeline-sub{text-align:center;font-size:.74rem;color:var(--g500);margin-bottom:24px}
+.timeline{position:relative;display:flex;align-items:flex-start;justify-content:space-between;max-width:880px;margin:0 auto;padding:0 10px}
+.timeline::before{content:'';position:absolute;top:18px;left:24px;right:24px;height:3px;background:var(--g200);border-radius:2px;z-index:0}
+.timeline .tl-progress{position:absolute;top:18px;left:24px;height:3px;background:linear-gradient(90deg,var(--pri),var(--acc));border-radius:2px;z-index:1;width:0;transition:width 1.5s ease}
+.timeline.animated .tl-progress{width:calc(100% - 48px)}
+.tl-node{display:flex;flex-direction:column;align-items:center;position:relative;z-index:2;flex:1;max-width:110px}
+.tl-dot{width:36px;height:36px;border-radius:50%;background:#fff;border:3px solid var(--g300);display:flex;align-items:center;justify-content:center;font-size:.75rem;transition:all .4s;cursor:default;position:relative}
+.tl-dot::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid transparent;transition:border-color .4s}
+.timeline.animated .tl-node .tl-dot{border-color:var(--pri);background:var(--pri-l);animation:nodeAppear .4s ease both}
+.timeline.animated .tl-node .tl-dot::after{border-color:rgba(37,99,235,.2)}
+.timeline.animated .tl-node:nth-child(1) .tl-dot{animation-delay:.2s}
+.timeline.animated .tl-node:nth-child(2) .tl-dot{animation-delay:.4s}
+.timeline.animated .tl-node:nth-child(3) .tl-dot{animation-delay:.6s}
+.timeline.animated .tl-node:nth-child(4) .tl-dot{animation-delay:.8s}
+.timeline.animated .tl-node:nth-child(5) .tl-dot{animation-delay:1s}
+.timeline.animated .tl-node:nth-child(6) .tl-dot{animation-delay:1.2s}
+.timeline.animated .tl-node:nth-child(7) .tl-dot{animation-delay:1.4s}
+.tl-label{margin-top:10px;text-align:center}
+.tl-label .tl-date{font-size:.6rem;font-weight:700;color:var(--pri);text-transform:uppercase;letter-spacing:.5px}
+.tl-label .tl-text{font-size:.64rem;color:var(--g600);line-height:1.35;margin-top:2px;font-weight:500}
+.tl-node:hover .tl-dot{transform:scale(1.15);box-shadow:0 0 16px rgba(37,99,235,.3)}
 
 /* CONTENT */
-.content{max-width:960px;margin:0 auto;padding:40px 40px 80px}
-.section{margin-bottom:56px;scroll-margin-top:30px}
-.section-title{font-size:1.45rem;font-weight:800;color:var(--g900);margin-bottom:6px;display:flex;align-items:center;gap:10px;letter-spacing:-.3px}
-.section-title .st-ico{width:36px;height:36px;border-radius:var(--rad-sm);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
-.section-sub{font-size:.8rem;color:var(--g500);margin-bottom:24px;line-height:1.5}
+.content{max-width:920px;margin:0 auto;padding:30px 34px 50px}
+.section{margin-bottom:36px;scroll-margin-top:20px}
+.section-title{font-size:1.3rem;font-weight:800;color:var(--g900);margin-bottom:4px;display:flex;align-items:center;gap:9px;letter-spacing:-.3px}
+.section-title .st-ico{width:32px;height:32px;border-radius:var(--rad-sm);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
+.section-sub{font-size:.76rem;color:var(--g500);margin-bottom:16px;line-height:1.5}
 
-/* CARDS */
-.card{background:#fff;border:1px solid var(--g200);border-radius:var(--rad);padding:28px;margin-bottom:20px;box-shadow:var(--shadow);transition:box-shadow .2s}
-.card:hover{box-shadow:var(--shadow-md)}
-.card-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:16px}
-.card-icon{width:42px;height:42px;border-radius:var(--rad-sm);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
-.card-head h3{font-size:1.05rem;font-weight:700;color:var(--g900);line-height:1.3}
-.card-head .card-tag{font-size:.65rem;font-weight:600;padding:2px 10px;border-radius:12px;margin-top:4px;display:inline-block}
+.card{background:#fff;border:1px solid var(--g200);border-radius:var(--rad);padding:22px;margin-bottom:14px;box-shadow:var(--shadow);transition:box-shadow .25s,transform .25s}
+.card:hover{box-shadow:var(--shadow-md);transform:translateY(-1px)}
+.card-head{display:flex;align-items:flex-start;gap:11px;margin-bottom:12px}
+.card-icon{width:38px;height:38px;border-radius:var(--rad-sm);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
+.card-head h3{font-size:.96rem;font-weight:700;color:var(--g900);line-height:1.3}
+.card-head .card-tag{font-size:.62rem;font-weight:600;padding:2px 9px;border-radius:12px;margin-top:3px;display:inline-block}
 
-.detail-list{list-style:none;padding:0}
-.detail-list li{position:relative;padding:6px 0 6px 22px;font-size:.84rem;color:var(--g700);line-height:1.65}
-.detail-list li::before{content:'▸';position:absolute;left:0;color:var(--pri);font-weight:700;font-size:.9rem}
+.dl{list-style:none;padding:0}
+.dl li{position:relative;padding:4px 0 4px 18px;font-size:.8rem;color:var(--g700);line-height:1.6}
+.dl li::before{content:'▸';position:absolute;left:0;color:var(--pri);font-weight:700;font-size:.85rem}
 
-.impact-box{background:var(--grn-l);border:1px solid #a7f3d0;border-radius:var(--rad-sm);padding:16px 20px;margin-top:16px}
-.impact-box h4{font-size:.78rem;font-weight:700;color:var(--grn);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
-.impact-box ul{list-style:none;padding:0}
-.impact-box li{padding:4px 0 4px 18px;font-size:.82rem;color:#065f46;position:relative;line-height:1.6}
-.impact-box li::before{content:'✓';position:absolute;left:0;font-weight:700;color:var(--grn)}
+.ib{background:var(--grn-l);border:1px solid #a7f3d0;border-radius:var(--rad-sm);padding:12px 16px;margin-top:12px}
+.ib h4{font-size:.72rem;font-weight:700;color:var(--grn);margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px}
+.ib ul{list-style:none;padding:0}
+.ib li{padding:2px 0 2px 15px;font-size:.78rem;color:#065f46;position:relative;line-height:1.5}
+.ib li::before{content:'✓';position:absolute;left:0;font-weight:700;color:var(--grn)}
 
-.revenue-tag{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,#fef3c7,#fde68a);border:1px solid #f59e0b;padding:3px 12px;border-radius:16px;font-size:.7rem;font-weight:700;color:#92400e;margin-top:8px}
+.rv{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,#fef3c7,#fde68a);border:1px solid #f59e0b;padding:3px 11px;border-radius:16px;font-size:.66rem;font-weight:700;color:#92400e;margin-top:7px;animation:glow 3s ease-in-out infinite}
 
-.tickets{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
-.ticket{font-size:.68rem;background:var(--pri-l);color:var(--pri-d);padding:3px 10px;border-radius:12px;font-weight:600;text-decoration:none;transition:background .15s}
-.ticket:hover{background:#bfdbfe}
+/* IMAGES - GALLERY */
+.img-gallery{display:grid;gap:8px;margin:12px 0 8px}
+.img-gallery.g1{grid-template-columns:1fr}
+.img-gallery.g2{grid-template-columns:1fr 1fr}
+.img-gallery.g3{grid-template-columns:1fr 1fr;}.img-gallery.g3>.gi:first-child{grid-column:1/-1}
+.img-gallery.g4{grid-template-columns:1fr 1fr}
+.gi{border-radius:var(--rad-sm);overflow:hidden;background:var(--g100);border:1px solid var(--g200);padding:6px;cursor:pointer;transition:transform .2s,box-shadow .2s;position:relative}
+.gi:hover{transform:scale(1.01);box-shadow:var(--shadow-md)}
+.gi img{width:100%;display:block;border-radius:6px}
+.gi::after{content:'🔍 Click to expand';position:absolute;bottom:10px;right:10px;background:rgba(0,0,0,.6);color:#fff;font-size:.58rem;padding:2px 8px;border-radius:8px;opacity:0;transition:opacity .2s;pointer-events:none}
+.gi:hover::after{opacity:1}
 
-/* IMAGE SLIDESHOW */
-.slideshow{position:relative;margin:20px 0 10px;border-radius:var(--rad);overflow:hidden;background:var(--g100);border:1px solid var(--g200)}
-.slideshow .slides{display:flex;transition:transform .4s ease}
-.slideshow .slide{min-width:100%;padding:12px}
-.slideshow .slide img{width:100%;border-radius:var(--rad-sm);display:block;box-shadow:var(--shadow)}
-.slideshow .ss-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.92);border:1px solid var(--g200);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--g700);box-shadow:var(--shadow);z-index:2;transition:all .15s}
-.slideshow .ss-btn:hover{background:#fff;box-shadow:var(--shadow-md)}
-.slideshow .ss-prev{left:10px}
-.slideshow .ss-next{right:10px}
-.slideshow .ss-dots{text-align:center;padding:8px 0 12px;display:flex;justify-content:center;gap:6px}
-.slideshow .ss-dot{width:8px;height:8px;border-radius:50%;background:var(--g300);border:none;cursor:pointer;transition:all .2s}
-.slideshow .ss-dot.active{background:var(--pri);width:20px;border-radius:4px}
-.ss-counter{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.55);color:#fff;font-size:.65rem;padding:3px 10px;border-radius:12px;z-index:2}
+/* LIGHTBOX */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:1000;display:none;align-items:center;justify-content:center;cursor:zoom-out;backdrop-filter:blur(6px);animation:fadeIn .25s ease}
+.lightbox.show{display:flex}
+.lightbox img{max-width:92vw;max-height:90vh;border-radius:var(--rad);box-shadow:0 20px 60px rgba(0,0,0,.4);animation:countUp .3s ease}
+.lightbox .lb-close{position:absolute;top:16px;right:20px;color:#fff;font-size:1.6rem;cursor:pointer;background:rgba(255,255,255,.1);border:none;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.lightbox .lb-close:hover{background:rgba(255,255,255,.25)}
 
-/* SUBSECTIONS */
-.sub-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
-.sub-card{background:var(--g50);border:1px solid var(--g200);border-radius:var(--rad-sm);padding:18px}
-.sub-card h4{font-size:.82rem;font-weight:700;color:var(--g800);margin-bottom:8px}
-.sub-card p,.sub-card li{font-size:.8rem;color:var(--g600);line-height:1.6}
+.tix{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.tix a{font-size:.65rem;background:var(--pri-l);color:var(--pri-d);padding:2px 8px;border-radius:12px;font-weight:600;text-decoration:none;transition:all .15s}
+.tix a:hover{background:var(--pri);color:#fff}
 
-.proficiency-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.prof-card{background:#fff;border:1px solid var(--g200);border-radius:var(--rad);padding:22px;box-shadow:var(--shadow)}
-.prof-card h4{font-size:.88rem;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
-.prof-badge{font-size:.62rem;padding:2px 8px;border-radius:10px;font-weight:600}
+.sub-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.sub-card{background:var(--g50);border:1px solid var(--g200);border-radius:var(--rad-sm);padding:14px;transition:border-color .2s}
+.sub-card:hover{border-color:var(--pri-l)}
+.sub-card h4{font-size:.8rem;font-weight:700;color:var(--g800);margin-bottom:5px}
 
-.timeline-item{display:flex;gap:16px;margin-bottom:20px}
-.timeline-dot{width:12px;height:12px;border-radius:50%;background:var(--pri);margin-top:6px;flex-shrink:0;border:3px solid var(--pri-l)}
-.timeline-content{flex:1}
-.timeline-content h4{font-size:.88rem;font-weight:700;color:var(--g800)}
-.timeline-content p{font-size:.8rem;color:var(--g600);margin-top:2px}
+.proficiency-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.prof-card{background:#fff;border:1px solid var(--g200);border-radius:var(--rad);padding:18px;box-shadow:var(--shadow);transition:all .25s}
+.prof-card:hover{box-shadow:var(--shadow-md);border-color:var(--pri-l)}
+.prof-card h4{font-size:.84rem;font-weight:700;margin-bottom:7px;display:flex;align-items:center;gap:7px}
+.prof-badge{font-size:.58rem;padding:2px 7px;border-radius:10px;font-weight:600}
 
-/* COLORS for icons */
-.bg-blue{background:var(--pri-l);color:var(--pri)}
-.bg-purple{background:var(--acc-l);color:var(--acc)}
-.bg-green{background:var(--grn-l);color:var(--grn)}
-.bg-amber{background:var(--amb-l);color:var(--amb)}
-.bg-red{background:var(--red-l);color:var(--red)}
-.bg-slate{background:var(--g100);color:var(--g600)}
-.tag-blue{background:var(--pri-l);color:var(--pri-d)}
-.tag-green{background:var(--grn-l);color:#065f46}
-.tag-purple{background:var(--acc-l);color:#5b21b6}
-.tag-amber{background:var(--amb-l);color:#92400e}
+.bg-blue{background:var(--pri-l);color:var(--pri)}.bg-purple{background:var(--acc-l);color:var(--acc)}.bg-green{background:var(--grn-l);color:var(--grn)}.bg-amber{background:var(--amb-l);color:var(--amb)}.bg-red{background:var(--red-l);color:var(--red)}.bg-slate{background:var(--g100);color:var(--g600)}
+.tag-blue{background:var(--pri-l);color:var(--pri-d)}.tag-green{background:var(--grn-l);color:#065f46}.tag-purple{background:var(--acc-l);color:#5b21b6}.tag-amber{background:var(--amb-l);color:#92400e}
 
-.divider{border:none;border-top:1px solid var(--g200);margin:48px 0}
+.divider{border:none;border-top:1px solid var(--g200);margin:32px 0}
 
-/* RESPONSIVE */
-@media(max-width:900px){
-  .metrics{grid-template-columns:repeat(3,1fr)}
-  .sub-grid,.proficiency-grid{grid-template-columns:1fr}
-}
-@media(max-width:768px){
-  .sidebar{transform:translateX(-100%)}
-  .sidebar.open{transform:translateX(0)}
-  .burger{display:block}
-  .main{margin-left:0}
-  .hero{padding:50px 24px 36px}
-  .hero h1{font-size:1.6rem}
-  .metrics{grid-template-columns:repeat(2,1fr)}
-  .content{padding:24px 18px 60px}
-  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:90}
-  .overlay.show{display:block}
-}
+.footer{text-align:center;padding:28px 0 14px;color:var(--g400);font-size:.72rem;border-top:1px solid var(--g200);margin-top:28px}
+.footer b{color:var(--g600)}
+
+@media(max-width:900px){.metrics{grid-template-columns:repeat(3,1fr)}.sub-grid,.proficiency-grid,.img-gallery.g2,.img-gallery.g4{grid-template-columns:1fr}.timeline{flex-wrap:wrap;gap:10px;justify-content:center}.timeline::before,.tl-progress{display:none}}
+@media(max-width:768px){.sidebar{transform:translateX(-100%)}.sidebar.open{transform:translateX(0)}.burger{display:block}.main{margin-left:0}.hero{padding:40px 18px 28px}.hero h1{font-size:1.4rem}.metrics{grid-template-columns:repeat(2,1fr)}.content{padding:18px 14px 40px}.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:90}.overlay.show{display:block}.timeline-section{padding:24px 16px 20px}}
 </style>
 </head>
 <body>
-
 <div class="burger" onclick="toggleSidebar()"><span></span><span></span><span></span></div>
 <div class="overlay" onclick="toggleSidebar()"></div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLB()">
+  <button class="lb-close" onclick="closeLB()">✕</button>
+  <img id="lb-img" src="" alt="Preview">
+</div>
 
 <aside class="sidebar" id="sidebar">
 <div class="side-head">
@@ -160,8 +185,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--
 </div>
 <nav class="side-nav">
   <div class="nav-group">Overview</div>
-  <a href="#hero" class="active"><span class="ico">🏠</span>Summary</a>
-
+  <a href="#hero" class="active"><span class="ico">🏠</span>Summary & Timeline</a>
   <div class="nav-group">Core Features</div>
   <a href="#dynamic-status"><span class="ico">🔄</span>Dynamic Order Status</a>
   <a href="#pipedream"><span class="ico">🔔</span>Pipedream Notifications</a>
@@ -169,7 +193,6 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--
   <a href="#callbacks"><span class="ico">📡</span>Order & Delivery Callbacks</a>
   <a href="#multi-shipment"><span class="ico">🚚</span>Multi-Shipment ETA</a>
   <a href="#line-risks"><span class="ico">⚠️</span>Line Level Risks</a>
-
   <div class="nav-group">Platform & Ops</div>
   <a href="#defects"><span class="ico">🐛</span>Defect Resolution (50+)</a>
   <a href="#engineering"><span class="ico">🔧</span>Engineering Optimizations</a>
@@ -179,17 +202,14 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--
   <a href="#postgres"><span class="ico">🗄️</span>PostgreSQL Upgrade</a>
   <a href="#stability"><span class="ico">📈</span>Service Stability</a>
   <a href="#releases"><span class="ico">🚀</span>Releases & Onboarding</a>
-
   <div class="nav-group">Enablement</div>
   <a href="#demo-data"><span class="ico">🎯</span>Demo Data Support</a>
   <a href="#po-connect"><span class="ico">🤝</span>PO Connect Integration</a>
   <a href="#thoughtspot"><span class="ico">📊</span>Thoughtspot Dashboard</a>
   <a href="#line-rdd"><span class="ico">📅</span>Line RDD Config</a>
-
   <div class="nav-group">Innovation & Growth</div>
   <a href="#ai"><span class="ico">🤖</span>AI-Powered Productivity</a>
   <a href="#hackathon"><span class="ico">🏆</span>Automation Hackathon</a>
-
   <div class="nav-group">Competencies</div>
   <a href="#autonomy"><span class="ico">🧭</span>Autonomy</a>
   <a href="#proficiency"><span class="ico">💻</span>Technical Proficiency</a>
@@ -202,1036 +222,604 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--
 
 <!-- HERO -->
 <section class="hero" id="hero">
+  <div class="hero-bg"><div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div></div>
+  <div class="grid-overlay"></div>
   <div class="tag">Promotion Review 2025–2026</div>
   <h1>KEY CONTRIBUTIONS &amp; IMPACT</h1>
   <div class="name">Shreya Dhanta</div>
   <div class="role">Software Engineer · Order Visibility Platform · FourKites</div>
   <div class="metrics">
-    <div class="met"><div class="num">$2.5M+</div><div class="lbl">Revenue Impact<br>Enabled</div></div>
-    <div class="met"><div class="num">99%</div><div class="lbl">Pipeline Message<br>Reduction</div></div>
+    <div class="met"><div class="num" data-count="2.5" data-prefix="$" data-suffix="M+">$0</div><div class="lbl">Revenue Impact<br>Enabled</div></div>
+    <div class="met"><div class="num" data-count="99" data-suffix="%">0</div><div class="lbl">Pipeline Message<br>Reduction</div></div>
     <div class="met"><div class="num">30s→4s</div><div class="lbl">API Response<br>Time</div></div>
-    <div class="met"><div class="num">50+</div><div class="lbl">Production<br>Defects Fixed</div></div>
+    <div class="met"><div class="num" data-count="50" data-suffix="+">0</div><div class="lbl">Production<br>Defects Fixed</div></div>
     <div class="met"><div class="num">19→78%</div><div class="lbl">Test Coverage<br>Improvement</div></div>
   </div>
 </section>
 
+<!-- INTERACTIVE TIMELINE -->
+<div class="timeline-section" id="tl-section">
+  <div class="timeline-title">Journey: 2025 → 2026</div>
+  <div class="timeline-sub">Key milestones across the review period</div>
+  <div class="timeline" id="timeline">
+    <div class="tl-progress"></div>
+    <div class="tl-node"><div class="tl-dot">🏗️</div><div class="tl-label"><div class="tl-date">Q1 2025</div><div class="tl-text">Read Adapter CQRS<br>30s → 4s response</div></div></div>
+    <div class="tl-node"><div class="tl-dot">🔔</div><div class="tl-label"><div class="tl-date">Q1 2025</div><div class="tl-text">Pipedream Notifications<br>$252K Lactalis</div></div></div>
+    <div class="tl-node"><div class="tl-dot">📡</div><div class="tl-label"><div class="tl-date">Q2 2025</div><div class="tl-text">Callbacks & Line Risks<br>$55K SCJ deal</div></div></div>
+    <div class="tl-node"><div class="tl-dot">🔄</div><div class="tl-label"><div class="tl-date">Q2 2025</div><div class="tl-text">Dynamic Status<br>$2.1M unblocked</div></div></div>
+    <div class="tl-node"><div class="tl-dot">🔧</div><div class="tl-label"><div class="tl-date">Q3 2025</div><div class="tl-text">Pipeline 99% fix<br>50+ bug fixes</div></div></div>
+    <div class="tl-node"><div class="tl-dot">🗄️</div><div class="tl-label"><div class="tl-date">Q3 2025</div><div class="tl-text">PG 13→16 Upgrade<br>Zero downtime</div></div></div>
+    <div class="tl-node"><div class="tl-dot">🏆</div><div class="tl-label"><div class="tl-date">Q4 2025</div><div class="tl-text">Hackathon 19→78%<br>AI Guardian Tool</div></div></div>
+  </div>
+</div>
+
 <div class="content">
 
-<!-- ===== DYNAMIC ORDER STATUS ===== -->
-<section class="section" id="dynamic-status">
+<!-- DYNAMIC ORDER STATUS -->
+<section class="section reveal" id="dynamic-status">
   <div class="section-title"><span class="st-ico bg-blue">🔄</span> Dynamic Order Status</div>
   <div class="section-sub">End-to-end implementation of customizable order status system across frontend and backend</div>
-
   <div class="card">
-    <div class="card-head">
-      <div class="card-icon bg-blue">⚙️</div>
-      <div><h3>Implementation Details</h3><span class="card-tag tag-blue">Full-Stack Feature</span></div>
-    </div>
-    <ul class="detail-list">
-      <li><strong>Dynamic status system</strong> – Replaced static order status with customizable status values across Order Listing, Dashboard, Insights Dashboard, and Workspace modules</li>
-      <li><strong>Company-specific customization</strong> – Enabled company-specific order statuses and workflows by adding Elasticsearch support for internal status tracking and updating filter logic across all modules</li>
-      <li><strong>Hardcoded to dynamic migration</strong> – Migrated hardcoded status values to dynamic tables in Order Insights Dashboard with provision for automated data sync via Airflow</li>
-      <li><strong>Platform consistency</strong> – Achieved consistency across all dashboards and eliminated one-size-fits-all limitation, allowing businesses to adapt the platform to their unique workflows</li>
+    <div class="card-head"><div class="card-icon bg-blue">⚙️</div><div><h3>Implementation Details</h3><span class="card-tag tag-blue">Full-Stack Feature</span></div></div>
+    <ul class="dl">
+      <li><strong>Dynamic status system</strong> – Replaced static order status with customizable values across Order Listing, Dashboard, Insights Dashboard, and Workspace modules</li>
+      <li><strong>Company-specific customization</strong> – Enabled company-specific order statuses by adding Elasticsearch support for internal status tracking and updating filter logic</li>
+      <li><strong>Hardcoded to dynamic migration</strong> – Migrated hardcoded status values to dynamic tables in Order Insights Dashboard with automated data sync via Airflow</li>
+      <li><strong>Platform consistency</strong> – Achieved consistency across all dashboards, eliminating one-size-fits-all limitation</li>
     </ul>
-    <div class="impact-box">
-      <h4>💰 Business Impact</h4>
-      <ul>
-        <li>Unblocked Dollarcity ($29K opportunity) and 3M ($2.1M opportunity across all products) who were unable to begin platform implementation until this was delivered</li>
-        <li>Prevented potential contract cancellation due to feature gap</li>
-        <li>Removed status configuration blocker – reduced customer implementation timelines</li>
-        <li>Resolved capability gap delaying deals in pipeline, bringing platform in line with enterprise expectations</li>
-      </ul>
-    </div>
-    <div class="revenue-tag">💎 $2.1M+ pipeline unblocked</div>
-    <div class="slideshow" data-ss>
-      <div class="ss-counter"></div>
-      <div class="slides">
-        <div class="slide"><img src="dynamicstatus.png" alt="Dynamic Order Status"></div>
-      </div>
-      <div class="ss-dots"></div>
-    </div>
-    <div class="tickets">
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-5112" target="_blank">OV-5112</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-5126" target="_blank">OV-5126</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-5159" target="_blank">OV-5159</a>
-    </div>
+    <div class="ib"><h4>💰 Business Impact</h4><ul>
+      <li>Unblocked Dollarcity ($29K) and 3M ($2.1M across all products) who couldn't begin implementation</li>
+      <li>Prevented potential contract cancellation due to feature gap</li>
+      <li>Removed status configuration blocker – reduced customer implementation timelines</li>
+      <li>Resolved capability gap delaying deals in pipeline</li>
+    </ul></div>
+    <div class="rv">💎 $2.1M+ pipeline unblocked</div>
+    <div class="img-gallery g1"><div class="gi" onclick="openLB(this)"><img src="dynamicstatus.png" alt="Dynamic Order Status"></div></div>
+    <div class="tix"><a href="https://fourkites.atlassian.net/browse/OV-5112" target="_blank">OV-5112</a><a href="https://fourkites.atlassian.net/browse/OV-5126" target="_blank">OV-5126</a><a href="https://fourkites.atlassian.net/browse/OV-5159" target="_blank">OV-5159</a></div>
   </div>
 </section>
 
-<!-- ===== PIPEDREAM NOTIFICATIONS ===== -->
-<section class="section" id="pipedream">
+<!-- PIPEDREAM -->
+<section class="section reveal" id="pipedream">
   <div class="section-title"><span class="st-ico bg-purple">🔔</span> Pipedream Notifications</div>
   <div class="section-sub">Real-time short-shipped notification system with event-driven architecture</div>
-
   <div class="card">
-    <div class="card-head">
-      <div class="card-icon bg-purple">📬</div>
-      <div><h3>Implementation Details</h3><span class="card-tag tag-purple">Event-Driven</span></div>
-    </div>
-    <ul class="detail-list">
-      <li><strong>Real-time customer alerts</strong> – Instant notifications when shipment quantities don't match ordered quantities, eliminating manual monitoring</li>
-      <li><strong>Event-driven architecture</strong> – Built using Kafka messaging + JPA entity listeners for reliable, asynchronous event processing</li>
-      <li><strong>Short shipped detection logic</strong> – Notifications triggered when shippedQty &lt; orderedQty (invoked) and auto-resolved when fully shipped (revoked)</li>
-      <li><strong>Webhook integration</strong> – Seamless Pipedream integration with Bearer token authentication for secure, real-time delivery to customer systems</li>
-      <li><strong>Duplicate prevention</strong> – 24-hour Caffeine cache to prevent redundant notifications</li>
-      <li><strong>Replication lag handling</strong> – Consistency checks to ensure accurate notifications in distributed database setup</li>
+    <div class="card-head"><div class="card-icon bg-purple">📬</div><div><h3>Implementation Details</h3><span class="card-tag tag-purple">Event-Driven</span></div></div>
+    <ul class="dl">
+      <li><strong>Real-time alerts</strong> – Instant notifications when shipment quantities don't match ordered quantities, eliminating manual monitoring</li>
+      <li><strong>Event-driven architecture</strong> – Kafka messaging + JPA entity listeners for reliable async processing</li>
+      <li><strong>Short shipped detection</strong> – Triggered when shippedQty &lt; orderedQty (invoked), auto-resolved when fully shipped (revoked)</li>
+      <li><strong>Webhook integration</strong> – Pipedream with Bearer token authentication for secure real-time delivery</li>
+      <li><strong>Duplicate prevention</strong> – 24-hour Caffeine cache; replication lag consistency checks</li>
     </ul>
-    <div class="impact-box">
-      <h4>💰 Business Impact</h4>
-      <ul>
-        <li>Primary production feature for Lactalis ($252K deal) – addresses their critical pain point of manual shipment tracking</li>
-        <li>Competitive differentiation – Proactive shipment visibility ahead of competitors</li>
-        <li>Blueprint for future enterprise deals with supply chain visibility needs</li>
-      </ul>
-    </div>
-    <div class="revenue-tag">💎 $252K Lactalis deal enabled</div>
-    <div class="slideshow" data-ss>
-      <div class="ss-counter"></div>
-      <div class="slides">
-        <div class="slide"><img src="pipedream 1.png" alt="Pipedream Notifications"></div>
-      </div>
-      <div class="ss-dots"></div>
-    </div>
-    <div class="tickets">
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-4536" target="_blank">OV-4536</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-4845" target="_blank">OV-4845</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-4894" target="_blank">OV-4894</a>
-    </div>
+    <div class="ib"><h4>💰 Business Impact</h4><ul>
+      <li>Primary production feature for Lactalis ($252K deal)</li>
+      <li>Competitive differentiation – proactive shipment visibility ahead of competitors</li>
+      <li>Blueprint for future enterprise deals</li>
+    </ul></div>
+    <div class="rv">💎 $252K Lactalis deal enabled</div>
+    <div class="img-gallery g1"><div class="gi" onclick="openLB(this)"><img src="pipedream 1.png" alt="Pipedream"></div></div>
+    <div class="tix"><a href="https://fourkites.atlassian.net/browse/OV-4536" target="_blank">OV-4536</a><a href="https://fourkites.atlassian.net/browse/OV-4845" target="_blank">OV-4845</a><a href="https://fourkites.atlassian.net/browse/OV-4894" target="_blank">OV-4894</a></div>
   </div>
 </section>
 
-<!-- ===== READ ADAPTER ===== -->
-<section class="section" id="read-adapter">
+<!-- READ ADAPTER -->
+<section class="section reveal" id="read-adapter">
   <div class="section-title"><span class="st-ico bg-green">⚡</span> Read Adapter Implementation</div>
   <div class="section-sub">CQRS architecture enabling read/write separation for enterprise-grade performance</div>
-
   <div class="card">
-    <div class="card-head">
-      <div class="card-icon bg-green">🏗️</div>
-      <div><h3>Architecture & Implementation</h3><span class="card-tag tag-green">CQRS Pattern</span></div>
-    </div>
-    <ul class="detail-list">
-      <li><strong>CQRS architecture</strong> – Read/write separation routing read operations to PostgreSQL replicas while preserving primary database for writes, reducing lock contention</li>
-      <li><strong>Kafka-based async processing</strong> – Event-driven consumption from ois-fields-actions topic, decoupling read operations from synchronous write path</li>
-      <li><strong>Intelligent retry with auto-fallback</strong> – Custom DataSourceRetryWrapper with exponential backoff and automatic routing to primary database when replica conflicts occur</li>
-      <li><strong>Replication lag handling</strong> – Consistency checks to detect stale replica data and ensure accurate query results in distributed setup</li>
-      <li><strong>Duplicate prevention</strong> – 24-hour Caffeine cache (10K entries) to prevent reprocessing of duplicate Kafka messages</li>
+    <div class="card-head"><div class="card-icon bg-green">🏗️</div><div><h3>Architecture & Implementation</h3><span class="card-tag tag-green">CQRS Pattern</span></div></div>
+    <ul class="dl">
+      <li><strong>CQRS architecture</strong> – Read/write separation routing reads to PostgreSQL replicas, reducing lock contention</li>
+      <li><strong>Kafka-based async processing</strong> – Event-driven consumption from ois-fields-actions topic</li>
+      <li><strong>Intelligent retry with auto-fallback</strong> – Custom DataSourceRetryWrapper with exponential backoff and automatic primary routing</li>
+      <li><strong>Replication lag handling</strong> – Consistency checks detecting stale replica data</li>
+      <li><strong>Duplicate prevention</strong> – 24-hour Caffeine cache (10K entries)</li>
     </ul>
-    <div class="impact-box">
-      <h4>⚡ Performance Impact</h4>
-      <ul>
-        <li>Response times reduced from 30s to 4–6s, eliminating timeout errors</li>
-        <li>4:1 connection ratio (40 read vs 10 write) enabling horizontal scaling for 200+ concurrent users</li>
-        <li>Auto-fallback with 3 retry attempts (500ms → 4,000ms backoff) ensures uninterrupted service</li>
-        <li>Supports 4,000 line items per order and 500 concurrent users under spike conditions</li>
-      </ul>
-    </div>
-    <div class="slideshow" data-ss>
-      <div class="ss-counter"></div>
-      <div class="slides">
-        <div class="slide"><img src="read_adapter.png" alt="Read Adapter Implementation"></div>
-      </div>
-      <div class="ss-dots"></div>
-    </div>
-    <div class="tickets">
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-4536" target="_blank">OV-4536</a>
-    </div>
+    <div class="ib"><h4>⚡ Performance Impact</h4><ul>
+      <li>Response times: 30s → 4–6s, eliminating timeouts</li>
+      <li>4:1 connection ratio (40 read / 10 write) for 200+ concurrent users</li>
+      <li>3 retry attempts (500ms → 4s backoff) for uninterrupted service</li>
+      <li>Supports 4,000 line items/order and 500 concurrent users</li>
+    </ul></div>
+    <div class="img-gallery g1"><div class="gi" onclick="openLB(this)"><img src="read_adapter.png" alt="Read Adapter"></div></div>
+    <div class="tix"><a href="https://fourkites.atlassian.net/browse/OV-4536" target="_blank">OV-4536</a></div>
   </div>
 </section>
 
-<!-- ===== ORDER & DELIVERY CALLBACKS ===== -->
-<section class="section" id="callbacks">
+<!-- CALLBACKS -->
+<section class="section reveal" id="callbacks">
   <div class="section-title"><span class="st-ico bg-amber">📡</span> Order &amp; Delivery Callbacks</div>
   <div class="section-sub">Event-driven callback system for real-time customer ERP/WMS integration</div>
-
   <div class="card">
-    <div class="card-head">
-      <div class="card-icon bg-amber">📨</div>
-      <div><h3>Implementation Details</h3><span class="card-tag tag-amber">Protobuf · Kafka</span></div>
-    </div>
-    <ul class="detail-list">
-      <li><strong>Event-driven processing</strong> – Kafka consumer listens to ois-fields-actions topic, routes messages to callback service based on message type (ORDER_CREATED, ORDER_UPDATED, DELIVERY_ETA_CHANGED)</li>
-      <li><strong>Callback payload construction</strong> – Comprehensive OrderCallbacksDTO with order details, line items, delivery locations, current/previous ETA values, and shipment attributes</li>
-      <li><strong>Protobuf serialization</strong> – Converts payload to NotificationsWorkerCallbackMessage protobuf format, sends to company-specific Kafka topic</li>
-      <li><strong>Retry with consistency checks</strong> – Validates updated_at timestamp (±100ms tolerance) against read replica, exponential backoff retry (500ms → 4s, max 3 attempts)</li>
-      <li><strong>Feature flag gating</strong> – Per-company callback control via shouldSendCallbackMessage(companyId) without deployment</li>
+    <div class="card-head"><div class="card-icon bg-amber">📨</div><div><h3>Implementation Details</h3><span class="card-tag tag-amber">Protobuf · Kafka</span></div></div>
+    <ul class="dl">
+      <li><strong>Event-driven processing</strong> – Kafka consumer routes messages by type (ORDER_CREATED, ORDER_UPDATED, DELIVERY_ETA_CHANGED)</li>
+      <li><strong>Callback payload</strong> – OrderCallbacksDTO with order details, line items, delivery locations, ETAs, shipment attributes</li>
+      <li><strong>Protobuf serialization</strong> – Converts to NotificationsWorkerCallbackMessage, sends to company-specific Kafka topic</li>
+      <li><strong>Retry with consistency</strong> – updated_at validation (±100ms), exponential backoff (500ms → 4s, max 3)</li>
+      <li><strong>Feature flag gating</strong> – Per-company control via shouldSendCallbackMessage(companyId)</li>
     </ul>
-    <div class="impact-box">
-      <h4>💰 Business Impact</h4>
-      <ul>
-        <li>SCJ ($55K deal) – Callbacks are a critical capability they're paying for, validating direct revenue impact</li>
-        <li>Real-time visibility – Instant notifications on order creation, updates, and ETA changes</li>
-        <li>System integration – Protobuf-based callbacks allow direct ERP/WMS integration</li>
-        <li>Reduced support queries – Proactive ETA change notifications</li>
-      </ul>
-    </div>
-    <div class="revenue-tag">💎 $55K SCJ deal enabled</div>
-    <div class="slideshow" data-ss>
-      <div class="ss-counter"></div>
-      <div class="slides">
-        <div class="slide"><img src="callback.png" alt="Callback Architecture"></div>
-        <div class="slide"><img src="callback2.png" alt="Callback Implementation"></div>
-      </div>
-      <button class="ss-btn ss-prev">‹</button>
-      <button class="ss-btn ss-next">›</button>
-      <div class="ss-dots"></div>
-    </div>
-    <div class="tickets">
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-4766" target="_blank">OV-4766</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-4433" target="_blank">OV-4433</a>
-    </div>
+    <div class="ib"><h4>💰 Business Impact</h4><ul>
+      <li>SCJ ($55K deal) – critical capability they're paying for</li>
+      <li>Real-time visibility on order creation, updates, ETA changes</li>
+      <li>Protobuf-based callbacks for direct ERP/WMS integration</li>
+      <li>Reduced support queries via proactive ETA notifications</li>
+    </ul></div>
+    <div class="rv">💎 $55K SCJ deal enabled</div>
+    <div class="img-gallery g2"><div class="gi" onclick="openLB(this)"><img src="callback.png" alt="Callback 1"></div><div class="gi" onclick="openLB(this)"><img src="callback2.png" alt="Callback 2"></div></div>
+    <div class="tix"><a href="https://fourkites.atlassian.net/browse/OV-4766" target="_blank">OV-4766</a><a href="https://fourkites.atlassian.net/browse/OV-4433" target="_blank">OV-4433</a></div>
   </div>
 </section>
 
-<!-- ===== MULTI-SHIPMENT ETA ===== -->
-<section class="section" id="multi-shipment">
+<!-- MULTI-SHIPMENT -->
+<section class="section reveal" id="multi-shipment">
   <div class="section-title"><span class="st-ico bg-blue">🚚</span> Delivery ETA &amp; Status – Multi-Shipment</div>
-  <div class="section-sub">One of the most complex features – sophisticated status aggregation across multi-leg and parallel shipments</div>
-
+  <div class="section-sub">Sophisticated status aggregation across multi-leg and parallel shipments</div>
   <div class="card">
-    <div class="card-head">
-      <div class="card-icon bg-blue">🗺️</div>
-      <div><h3>Implementation Details</h3><span class="card-tag tag-blue">Complex Logic</span></div>
-    </div>
-    <ul class="detail-list">
-      <li><strong>Multi-leg shipment detection</strong> – Logic using masterReferenceNumber and masterSequenceNumber; destination leg delivered status takes precedence, falling back to first leg shipped status</li>
-      <li><strong>Intelligent status aggregation</strong> – Minimum-priority-based selection algorithm across parallel shipments, ensuring the most conservative status representation</li>
-      <li><strong>ERP status fallback</strong> – delivery_latest_erp_status/timestamp columns enabling comparison between shipment-derived and ERP-provided status with automatic higher-priority selection</li>
-      <li><strong>Optimized DTO projection</strong> – ShipmentDeliveryInfo DTO fetching only 19 required fields in single query, combined with DELIVERY_COMPUTATION_MESSAGE for decoupled Kafka batch processing</li>
+    <div class="card-head"><div class="card-icon bg-blue">🗺️</div><div><h3>Implementation</h3><span class="card-tag tag-blue">Complex Logic</span></div></div>
+    <ul class="dl">
+      <li><strong>Multi-leg detection</strong> – masterReferenceNumber/masterSequenceNumber; destination leg takes precedence</li>
+      <li><strong>Status aggregation</strong> – Minimum-priority selection across parallel shipments</li>
+      <li><strong>ERP fallback</strong> – delivery_latest_erp_status columns with automatic higher-priority selection</li>
+      <li><strong>Optimized DTO</strong> – ShipmentDeliveryInfo fetching 19 fields, with DELIVERY_COMPUTATION_MESSAGE for Kafka batch</li>
     </ul>
-    <div class="impact-box">
-      <h4>🚚 Business Impact</h4>
-      <ul>
-        <li>Accurate delivery tracking for complex logistics networks with multi-leg shipments through distribution centers</li>
-        <li>Resolved status inconsistency showing incorrect "delivered" when only intermediate legs completed</li>
-        <li>Fixed parallel shipment status conflicts for split-shipment customers</li>
-        <li>Improved ETA accuracy by aggregating across all shipments and selecting latest arrival time</li>
-      </ul>
-    </div>
-    <div class="tickets">
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-4931" target="_blank">OV-4931</a>
-    </div>
+    <div class="ib"><h4>🚚 Impact</h4><ul>
+      <li>Accurate tracking for multi-leg shipments through distribution centers</li>
+      <li>Resolved incorrect "delivered" status when only intermediate legs completed</li>
+      <li>Fixed parallel shipment status conflicts for split-shipment customers</li>
+    </ul></div>
+    <div class="tix"><a href="https://fourkites.atlassian.net/browse/OV-4931" target="_blank">OV-4931</a></div>
   </div>
 </section>
 
-<!-- ===== LINE LEVEL RISKS ===== -->
-<section class="section" id="line-risks">
+<!-- LINE RISKS -->
+<section class="section reveal" id="line-risks">
   <div class="section-title"><span class="st-ico bg-red">⚠️</span> Line Level Risks</div>
-  <div class="section-sub">Extended risk tracking to support line-item granularity for SCJ</div>
-
+  <div class="section-sub">Line-item granularity risk tracking for SCJ</div>
   <div class="card">
-    <div class="card-head">
-      <div class="card-icon bg-red">📊</div>
-      <div><h3>Implementation Details</h3><span class="card-tag tag-amber">SCJ Feature</span></div>
-    </div>
-    <ul class="detail-list">
-      <li><strong>Line-level granularity</strong> – Introduced lineId association in OisRiskReason entity with unique constraints for data integrity</li>
-      <li><strong>Chain-of-responsibility pattern</strong> – LineRiskServiceImpl with LineDeliveryAtRiskReasonComputation for individual line item risk computation</li>
-      <li><strong>Type differentiation</strong> – ORDER vs LINE in ShipmentRiskDetails to clearly separate and route risk computations</li>
-      <li><strong>Schema + API</strong> – New migrations, repositories, and API endpoints in late-reason-code-service for line-level risk persistence</li>
+    <div class="card-head"><div class="card-icon bg-red">📊</div><div><h3>Implementation</h3><span class="card-tag tag-amber">SCJ Feature</span></div></div>
+    <ul class="dl">
+      <li><strong>Line-level granularity</strong> – lineId in OisRiskReason entity with unique constraints</li>
+      <li><strong>Chain-of-responsibility</strong> – LineRiskServiceImpl with LineDeliveryAtRiskReasonComputation</li>
+      <li><strong>Type differentiation</strong> – ORDER vs LINE in ShipmentRiskDetails</li>
+      <li><strong>Schema + API</strong> – New migrations, repositories, endpoints in late-reason-code-service</li>
     </ul>
-    <div class="impact-box">
-      <h4>💰 Business Impact</h4>
-      <ul>
-        <li>Critical feature for SCJ ($55K paying customer) enabling precise product-line risk identification</li>
-        <li>Improved operational decision-making with actionable risk insights per line item</li>
-        <li>Prevented line-specific risks from being masked at aggregated order level</li>
-        <li>Established core backend for end-to-end line-level risk tracking across fulfillment lifecycle</li>
-      </ul>
-    </div>
-    <div class="tickets">
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-4513" target="_blank">OV-4513</a>
-    </div>
+    <div class="ib"><h4>💰 Impact</h4><ul>
+      <li>Critical for SCJ ($55K) – precise product-line risk identification</li>
+      <li>Actionable risk insights per line item vs aggregated order level</li>
+    </ul></div>
+    <div class="tix"><a href="https://fourkites.atlassian.net/browse/OV-4513" target="_blank">OV-4513</a></div>
   </div>
 </section>
 
 <hr class="divider">
 
-<!-- ===== DEFECTS ===== -->
-<section class="section" id="defects">
+<!-- DEFECTS -->
+<section class="section reveal" id="defects">
   <div class="section-title"><span class="st-ico bg-red">🐛</span> Defects – Production Bug Resolution</div>
-  <div class="section-sub">Eliminated 50+ service defects across the Order Visibility landscape, reducing technical debt</div>
-
+  <div class="section-sub">Eliminated 50+ service defects, reducing technical debt across the OV landscape</div>
   <div class="card">
-    <div class="card-head">
-      <div class="card-icon bg-red">🔧</div>
-      <div><h3>Key Fixes (50+ Total)</h3><span class="card-tag tag-amber">Production Critical</span></div>
-    </div>
-    <ul class="detail-list">
-      <li>ETA cleanup logic for shipment deletions with proper recalculation for partial removals</li>
-      <li>Fixed Kafka 1MB payload size limit by optimizing callback message construction in Read Adapter</li>
-      <li>Corrected missing JVM metrics in Chronosphere dashboard by fixing performance data collection</li>
-      <li>Resolved inventory synchronization failures in outbound calculation logic after shipment events</li>
-      <li>Fixed pager notification delivery for on-call production incident alerts</li>
-      <li>Corrected API validation rejecting invalid paymentMethodCode values instead of prefixing "common."</li>
-      <li>Fixed Pipedream risk notification revoke logic clearing alerts when shipments reach full quantity</li>
-      <li>Resolved null pointer exception in line items page by adding defensive checks for missing RDD values</li>
-      <li>Fixed dashboard filter preservation during navigation between widgets and listing page</li>
-      <li>Corrected multi-shipment timestamp calculations using first/last shipment picked times</li>
+    <div class="card-head"><div class="card-icon bg-red">🔧</div><div><h3>Key Fixes (50+ Total)</h3><span class="card-tag tag-amber">Production Critical</span></div></div>
+    <ul class="dl">
+      <li>ETA cleanup logic for shipment deletions with proper recalculation</li>
+      <li>Kafka 1MB payload fix by optimizing callback messages in Read Adapter</li>
+      <li>Missing JVM metrics in Chronosphere dashboard</li>
+      <li>Inventory sync failures in outbound calculation after shipment events</li>
+      <li>Pager notification delivery for on-call alerts</li>
+      <li>API validation for paymentMethodCode prefix</li>
+      <li>Pipedream risk notification revoke logic</li>
+      <li>Null pointer in line items for missing RDD values</li>
+      <li>Dashboard filter preservation during navigation</li>
+      <li>Multi-shipment timestamp calculations</li>
     </ul>
-    <div class="impact-box">
-      <h4>✅ Impact</h4>
-      <ul>
-        <li>Platform stability maintained within SLA, preventing customer escalations</li>
-        <li>Data accuracy improvements eliminated recurring support tickets</li>
-        <li>UX bugs fixed ensuring seamless dashboard workflows</li>
-        <li>Monitoring infrastructure kept functional maintaining >90% uptime SLA</li>
-      </ul>
-    </div>
-    <div class="slideshow" data-ss>
-      <div class="ss-counter"></div>
-      <div class="slides">
-        <div class="slide"><img src="Defects - Production Bug Resolution.png" alt="Defects Resolution"></div>
-      </div>
-      <div class="ss-dots"></div>
-    </div>
-    <div class="tickets">
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-5242" target="_blank">OV-5242</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-5272" target="_blank">OV-5272</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-5158" target="_blank">OV-5158</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-4890" target="_blank">OV-4890</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-4775" target="_blank">OV-4775</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-4769" target="_blank">OV-4769</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-4609" target="_blank">OV-4609</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-4568" target="_blank">OV-4568</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-4450" target="_blank">OV-4450</a>
-    </div>
+    <div class="ib"><h4>✅ Impact</h4><ul>
+      <li>Platform stability within SLA preventing escalations</li>
+      <li>Eliminated recurring support tickets</li>
+      <li>Monitoring infrastructure functional for >90% uptime SLA</li>
+    </ul></div>
+    <div class="img-gallery g1"><div class="gi" onclick="openLB(this)"><img src="Defects - Production Bug Resolution.png" alt="Defects"></div></div>
+    <div class="tix"><a href="https://fourkites.atlassian.net/browse/OV-5242" target="_blank">OV-5242</a><a href="https://fourkites.atlassian.net/browse/OV-5272" target="_blank">OV-5272</a><a href="https://fourkites.atlassian.net/browse/OV-5158" target="_blank">OV-5158</a><a href="https://fourkites.atlassian.net/browse/OV-4890" target="_blank">OV-4890</a><a href="https://fourkites.atlassian.net/browse/OV-4775" target="_blank">OV-4775</a><a href="https://fourkites.atlassian.net/browse/OV-4769" target="_blank">OV-4769</a><a href="https://fourkites.atlassian.net/browse/OV-4609" target="_blank">OV-4609</a><a href="https://fourkites.atlassian.net/browse/OV-4568" target="_blank">OV-4568</a><a href="https://fourkites.atlassian.net/browse/OV-4450" target="_blank">OV-4450</a></div>
   </div>
 </section>
 
-<!-- ===== ENGINEERING OPTIMIZATIONS ===== -->
-<section class="section" id="engineering">
+<!-- ENGINEERING -->
+<section class="section reveal" id="engineering">
   <div class="section-title"><span class="st-ico bg-green">🔧</span> Engineering Optimizations</div>
-  <div class="section-sub">Critical pipeline optimization reducing message volume by 99%</div>
-
+  <div class="section-sub">Pipeline optimization: 99% message volume reduction</div>
   <div class="card">
-    <div class="card-head">
-      <div class="card-icon bg-green">📉</div>
-      <div><h3>Automated Risk Reason Pipeline Refactoring</h3><span class="card-tag tag-green">99% Reduction</span></div>
-    </div>
-    <ul class="detail-list">
-      <li><strong>Problem</strong> – High message volume (~1,000/sec from po-service) causing consumer-side processing lags, duplicate messages, and service instability requiring frequent restarts</li>
-      <li><strong>Duplicate detection logic</strong> – Added verification checks before sending messages to Late Reason Code service</li>
-      <li><strong>Risk caching system</strong> – Implemented risk data caching from Shipment Details table with existence verification before adding new risk entries</li>
-      <li><strong>Automatic retrieval</strong> – Established cache-based retrieval during message transmission</li>
+    <div class="card-head"><div class="card-icon bg-green">📉</div><div><h3>Risk Reason Pipeline Refactoring</h3><span class="card-tag tag-green">99% Reduction</span></div></div>
+    <ul class="dl">
+      <li><strong>Problem</strong> – ~1,000 msg/sec from po-service causing lags, duplicates, frequent restarts</li>
+      <li><strong>Duplicate detection</strong> – Verification checks before Late Reason Code service</li>
+      <li><strong>Risk caching</strong> – Shipment Details cache with existence verification</li>
+      <li><strong>Auto retrieval</strong> – Cache-based retrieval during message transmission</li>
     </ul>
-    <div class="impact-box">
-      <h4>📊 Results</h4>
-      <ul>
-        <li>Message rates decreased from ~1,000/sec to ~10/sec (99% reduction)</li>
-        <li>Eliminated processing lags completely</li>
-        <li>Service running smoothly without manual intervention/restarts</li>
-        <li>Resolved Meijer customer complaints about pipeline lags</li>
-      </ul>
-    </div>
-    <div class="slideshow" data-ss>
-      <div class="ss-counter"></div>
-      <div class="slides">
-        <div class="slide"><img src="Engineering Improvements Optimizations.png" alt="Engineering Optimizations"></div>
-      </div>
-      <div class="ss-dots"></div>
-    </div>
-    <div class="tickets">
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-4556" target="_blank">OV-4556</a>
-    </div>
+    <div class="ib"><h4>📊 Results</h4><ul>
+      <li>1,000/sec → 10/sec (99% reduction)</li>
+      <li>Eliminated processing lags and manual restarts</li>
+      <li>Resolved Meijer customer complaints</li>
+    </ul></div>
+    <div class="img-gallery g1"><div class="gi" onclick="openLB(this)"><img src="Engineering Improvements Optimizations.png" alt="Engineering"></div></div>
+    <div class="tix"><a href="https://fourkites.atlassian.net/browse/OV-4556" target="_blank">OV-4556</a></div>
   </div>
 </section>
 
-<!-- ===== @POSTLOAD FIX ===== -->
-<section class="section" id="postload">
-  <div class="section-title"><span class="st-ico bg-amber">💾</span> Lazy Loading Defeated by @PostLoad Fix</div>
-  <div class="section-sub">Resolved database overload caused by lazy loading being inadvertently defeated</div>
-
+<!-- POSTLOAD -->
+<section class="section reveal" id="postload">
+  <div class="section-title"><span class="st-ico bg-amber">💾</span> @PostLoad Lazy Loading Fix</div>
+  <div class="section-sub">Resolved database overload from defeated lazy loading</div>
   <div class="card">
-    <div class="card-head">
-      <div class="card-icon bg-amber">🔥</div>
-      <div><h3>Problem & Solution</h3><span class="card-tag tag-amber">DB Performance</span></div>
-    </div>
-    <ul class="detail-list">
-      <li><strong>Root cause</strong> – @PostLoad method accessing orderLineItems (FetchType.LAZY) triggered immediate database queries to load all line items</li>
-      <li><strong>Impact</strong> – High database load from top consumer query with high Calls/sec and Rows/sec, high memory consumption, frequent database alerts</li>
-      <li><strong>Fix</strong> – Removed @PostLoad method call, divided inventory triggers into respective listeners, optimized Inventory V2 Message handling</li>
+    <div class="card-head"><div class="card-icon bg-amber">🔥</div><div><h3>Problem & Solution</h3><span class="card-tag tag-amber">DB Performance</span></div></div>
+    <ul class="dl">
+      <li><strong>Root cause</strong> – @PostLoad accessing orderLineItems (FetchType.LAZY) triggered immediate DB queries</li>
+      <li><strong>Fix</strong> – Removed @PostLoad call, divided inventory triggers into separate listeners, optimized V2 handling</li>
     </ul>
-    <div class="impact-box">
-      <h4>📊 Results</h4>
-      <ul>
-        <li>Zero database alerts for 16+ consecutive days (Nov 11 – Nov 27)</li>
-        <li>Top consumer query now at zero Calls/sec and Rows/sec</li>
-        <li>Lazy loading works as intended – preventing unnecessary queries</li>
-        <li>Reduced memory consumption significantly</li>
-        <li>Eliminated need for manual intervention and DB monitoring</li>
-      </ul>
+    <div class="ib"><h4>📊 Results</h4><ul>
+      <li>Zero DB alerts for 16+ consecutive days</li>
+      <li>Top consumer query: zero Calls/sec</li>
+      <li>Lazy loading working as intended</li>
+      <li>Significant memory reduction</li>
+    </ul></div>
+    <div class="img-gallery g1">
+      <div class="gi" onclick="openLB(this)"><img src="Lazy Loading Defeated by @PostLoad.png" alt="PostLoad 1"></div>
+      <div class="gi" onclick="openLB(this)"><img src="Lazy Loading Defeated by @PostLoad2.png" alt="PostLoad 2"></div>
+      <div class="gi" onclick="openLB(this)"><img src="Lazy Loading Defeated by @PostLoad3.png" alt="PostLoad 3"></div>
     </div>
-    <div class="slideshow" data-ss>
-      <div class="ss-counter"></div>
-      <div class="slides">
-        <div class="slide"><img src="Lazy Loading Defeated by @PostLoad.png" alt="PostLoad Fix 1"></div>
-        <div class="slide"><img src="Lazy Loading Defeated by @PostLoad2.png" alt="PostLoad Fix 2"></div>
-        <div class="slide"><img src="Lazy Loading Defeated by @PostLoad3.png" alt="PostLoad Fix 3"></div>
-      </div>
-      <button class="ss-btn ss-prev">‹</button>
-      <button class="ss-btn ss-next">›</button>
-      <div class="ss-dots"></div>
-    </div>
-    <div class="tickets">
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-5116" target="_blank">OV-5116</a>
-    </div>
+    <div class="tix"><a href="https://fourkites.atlassian.net/browse/OV-5116" target="_blank">OV-5116</a></div>
   </div>
 </section>
 
-<!-- ===== API DEVELOPMENT ===== -->
-<section class="section" id="api">
+<!-- API -->
+<section class="section reveal" id="api">
   <div class="section-title"><span class="st-ico bg-blue">🔌</span> API Development &amp; Enhancements</div>
-  <div class="section-sub">Multiple API improvements for customer integration and self-service onboarding</div>
-
+  <div class="section-sub">Multiple API improvements for integration and self-service onboarding</div>
   <div class="card">
-    <div class="card-head">
-      <div class="card-icon bg-blue">🛠️</div>
-      <div><h3>Key Enhancements</h3></div>
-    </div>
-    <ul class="detail-list">
-      <li><strong>Case-insensitive comparison</strong> – LOWER() function for deliveryIdentifier and orderNumber preventing integration failures across Get and IsExist APIs</li>
-      <li><strong>DevPortal exposure</strong> – Synchronous order/delivery APIs with OAuth2 validation, API Gateway oauth2 plugin for dual authentication, documented Kong setup for self-service onboarding</li>
-      <li><strong>Get Delivery Details API</strong> – Complete DeliveryDetailsDTO with nested order/line data; lightweight Existence Check API with sub-100ms response using EXISTS query</li>
-      <li><strong>HTTP semantics fix</strong> – Changed GET API from 500 to 404 for non-existent resources, coordinated TechOps monitoring updates</li>
-      <li><strong>Internal API refactoring</strong> – Order/Line Item GET API for DevPortal compatibility with authentication updates, standardized schemas, enhanced error handling</li>
+    <ul class="dl">
+      <li><strong>Case-insensitive</strong> – LOWER() for deliveryIdentifier/orderNumber across Get/IsExist APIs</li>
+      <li><strong>DevPortal exposure</strong> – OAuth2 validation, Kong setup for self-service onboarding</li>
+      <li><strong>Delivery Details API</strong> – DeliveryDetailsDTO with nested data; Existence API sub-100ms</li>
+      <li><strong>HTTP semantics</strong> – 500→404 for missing resources; coordinated monitoring updates</li>
+      <li><strong>Internal refactoring</strong> – DevPortal-compatible schemas, auth updates, error handling</li>
     </ul>
-    <div class="impact-box">
-      <h4>✅ Impact</h4>
-      <ul>
-        <li>Eliminated case sensitivity failures reducing support tickets</li>
-        <li>Self-service API access streamlined onboarding from weeks to days</li>
-        <li>Reduced false monitoring alerts improving incident response accuracy</li>
-        <li>Expanded platform capabilities for diverse customer integration patterns</li>
-      </ul>
-    </div>
-    <div class="tickets">
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-5236" target="_blank">OV-5236</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-5208" target="_blank">OV-5208</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-5196" target="_blank">OV-5196</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-4796" target="_blank">OV-4796</a>
-    </div>
+    <div class="ib"><h4>✅ Impact</h4><ul>
+      <li>Eliminated case sensitivity failures; onboarding from weeks to days</li>
+      <li>Reduced false alerts; expanded integration patterns</li>
+    </ul></div>
+    <div class="tix"><a href="https://fourkites.atlassian.net/browse/OV-5236" target="_blank">OV-5236</a><a href="https://fourkites.atlassian.net/browse/OV-5208" target="_blank">OV-5208</a><a href="https://fourkites.atlassian.net/browse/OV-5196" target="_blank">OV-5196</a><a href="https://fourkites.atlassian.net/browse/OV-4796" target="_blank">OV-4796</a></div>
   </div>
 </section>
 
-<!-- ===== SECURITY ===== -->
-<section class="section" id="security">
-  <div class="section-title"><span class="st-ico bg-red">🔒</span> Addressing Security Concerns</div>
-  <div class="section-sub">Remediating hardcoded credentials and exposed ports across the platform</div>
-
+<!-- SECURITY -->
+<section class="section reveal" id="security">
+  <div class="section-title"><span class="st-ico bg-red">🔒</span> Security Remediation</div>
+  <div class="section-sub">Hardcoded credentials and exposed port remediation</div>
   <div class="card">
-    <div class="card-head">
-      <div class="card-icon bg-red">🛡️</div>
-      <div><h3>Security Remediation</h3><span class="card-tag tag-amber">Critical Priority</span></div>
-    </div>
-    <ul class="detail-list">
-      <li><strong>Hardcoded credentials migration</strong> – Migrating to secure secrets management; complete for QAT and Staging, in progress for Production</li>
-      <li><strong>JMX port exposure fix</strong> – Resolved insecure Java JMX Agent configuration where port 1099 was exposed without authentication or SSL in ois-ingestion-worker pods; coordinated with security to verify and block the unused port</li>
+    <ul class="dl">
+      <li><strong>Credentials migration</strong> – Secure secrets management; QAT/Staging complete, Production in progress</li>
+      <li><strong>JMX port fix</strong> – Blocked unauthenticated port 1099 in ois-ingestion-worker pods</li>
     </ul>
-    <div class="impact-box">
-      <h4>🔒 Impact</h4>
-      <ul>
-        <li>Reduces organizational vulnerability to external attacks</li>
-        <li>Protects customer data and maintains enterprise client trust</li>
-        <li>Supports vision of building secure, enterprise-grade platform for sensitive supply chain data</li>
-      </ul>
-    </div>
-    <div class="tickets">
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-5310" target="_blank">OV-5310</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-5222" target="_blank">OV-5222</a>
-    </div>
+    <div class="ib"><h4>🔒 Impact</h4><ul><li>Reduced attack surface, protecting customer data and enterprise trust</li></ul></div>
+    <div class="tix"><a href="https://fourkites.atlassian.net/browse/OV-5310" target="_blank">OV-5310</a><a href="https://fourkites.atlassian.net/browse/OV-5222" target="_blank">OV-5222</a></div>
   </div>
 </section>
 
-<!-- ===== POSTGRESQL UPGRADE ===== -->
-<section class="section" id="postgres">
-  <div class="section-title"><span class="st-ico bg-purple">🗄️</span> PostgreSQL Version Upgrade</div>
-  <div class="section-sub">Full fleet upgrade from PostgreSQL 13 → 16 with zero downtime</div>
-
+<!-- POSTGRESQL -->
+<section class="section reveal" id="postgres">
+  <div class="section-title"><span class="st-ico bg-purple">🗄️</span> PostgreSQL Upgrade 13 → 16</div>
+  <div class="section-sub">Full fleet upgrade with zero downtime via blue-green deployment</div>
   <div class="card">
-    <div class="card-head">
-      <div class="card-icon bg-purple">🚀</div>
-      <div><h3>Implementation</h3><span class="card-tag tag-green">Zero Downtime</span></div>
-    </div>
-    <ul class="detail-list">
-      <li><strong>Full fleet upgrade</strong> – PostgreSQL 13 → 16 across all OV services including Order, LRC, and Inventory databases</li>
-      <li><strong>Pre-upgrade analysis</strong> – Dependency mapping, performance benchmarking, rollback strategy preparation</li>
-      <li><strong>Blue-green deployment</strong> – Parallel environment deployment transitioning database connections without service interruption, maintaining 100% availability</li>
-      <li><strong>Data validation</strong> – Rigorous consistency and integrity checks with automated monitoring and real-time health checks preventing data loss</li>
+    <ul class="dl">
+      <li><strong>Full fleet</strong> – PG 13→16 across Order, LRC, and Inventory databases</li>
+      <li><strong>Blue-green deployment</strong> – Parallel environment; 100% availability throughout</li>
+      <li><strong>Validation</strong> – Automated monitoring, real-time health checks, rollback readiness</li>
     </ul>
-    <div class="impact-box">
-      <h4>✅ Impact</h4>
-      <ul>
-        <li>Zero downtime and zero errors maintaining 99.9% uptime SLA</li>
-        <li>No data loss or application issues post-upgrade</li>
-        <li>Unlocked PostgreSQL 16 performance improvements and advanced query optimization</li>
-        <li>Enhanced reliability with actively supported version for long-term security patches</li>
-      </ul>
-    </div>
-    <div class="slideshow" data-ss>
-      <div class="ss-counter"></div>
-      <div class="slides">
-        <div class="slide"><img src="PostgreSQL Version Upgrade.png" alt="PostgreSQL Upgrade"></div>
-      </div>
-      <div class="ss-dots"></div>
-    </div>
-    <div class="tickets">
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-4725" target="_blank">OV-4725</a>
-    </div>
+    <div class="ib"><h4>✅ Impact</h4><ul>
+      <li>Zero downtime, zero errors, zero data loss</li>
+      <li>Unlocked PG 16 query optimization and indexing</li>
+    </ul></div>
+    <div class="img-gallery g1"><div class="gi" onclick="openLB(this)"><img src="PostgreSQL Version Upgrade.png" alt="PG Upgrade"></div></div>
+    <div class="tix"><a href="https://fourkites.atlassian.net/browse/OV-4725" target="_blank">OV-4725</a></div>
   </div>
 </section>
 
-<!-- ===== SERVICE STABILITY ===== -->
-<section class="section" id="stability">
+<!-- STABILITY -->
+<section class="section reveal" id="stability">
   <div class="section-title"><span class="st-ico bg-slate">📈</span> Service Stability</div>
-  <div class="section-sub">Production CPU analysis and refresh script error diagnosis</div>
-
+  <div class="section-sub">CPU bottleneck resolution and refresh script fixes</div>
   <div class="card">
-    <div class="card-head">
-      <div class="card-icon bg-slate">🔍</div>
-      <div><h3>Stability Improvements</h3></div>
-    </div>
-    <ul class="detail-list">
-      <li><strong>Production CPU analysis</strong> – Analyzed root causes for high CPU utilization spikes identifying inefficient query patterns and resource-intensive operations</li>
-      <li><strong>Refresh script error diagnosis</strong> – Investigated refresh script failures identifying error patterns and implementing corrective measures for data synchronization workflows</li>
+    <ul class="dl">
+      <li><strong>CPU analysis</strong> – Identified inefficient query patterns during peak traffic</li>
+      <li><strong>Refresh script</strong> – Fixed execution failures affecting data sync workflows</li>
     </ul>
-    <div class="impact-box">
-      <h4>✅ Impact</h4>
-      <ul>
-        <li>Improved production stability by resolving CPU bottlenecks during peak traffic</li>
-        <li>Enhanced data synchronization reliability for real-time tracking</li>
-      </ul>
-    </div>
-    <div class="slideshow" data-ss>
-      <div class="ss-counter"></div>
-      <div class="slides">
-        <div class="slide"><img src="Service Stability.png" alt="Service Stability"></div>
-      </div>
-      <div class="ss-dots"></div>
-    </div>
-    <div class="tickets">
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-5048" target="_blank">OV-5048</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-5047" target="_blank">OV-5047</a>
-    </div>
+    <div class="img-gallery g1"><div class="gi" onclick="openLB(this)"><img src="Service Stability.png" alt="Stability"></div></div>
+    <div class="tix"><a href="https://fourkites.atlassian.net/browse/OV-5048" target="_blank">OV-5048</a><a href="https://fourkites.atlassian.net/browse/OV-5047" target="_blank">OV-5047</a></div>
   </div>
 </section>
 
-<!-- ===== RELEASES & ONBOARDING ===== -->
-<section class="section" id="releases">
-  <div class="section-title"><span class="st-ico bg-green">🚀</span> Customer Onboarding, Pagers &amp; Release Management</div>
-  <div class="section-sub">End-to-end ownership of production operations and customer setup</div>
-
+<!-- RELEASES -->
+<section class="section reveal" id="releases">
+  <div class="section-title"><span class="st-ico bg-green">🚀</span> Onboarding, Pagers &amp; Releases</div>
+  <div class="section-sub">End-to-end production operations ownership</div>
   <div class="card">
-    <div class="card-head">
-      <div class="card-icon bg-green">🎯</div>
-      <div><h3>Responsibilities & Execution</h3></div>
-    </div>
-    <ul class="detail-list">
-      <li><strong>Customer onboarding</strong> – Completed comprehensive OV platform setup including company-specific order/delivery status mappings, date/time field configurations across 20+ fields, ETA threshold settings, and object relationships for CSV-based order integration from Snowflake</li>
-      <li><strong>Pager management</strong> – Handled all pager issues and monitoring alerts ensuring on-call engineers received timely notifications and production incidents were escalated appropriately</li>
-      <li><strong>Release management</strong> – Managed all production releases: deployment sequences, database migrations, Elasticsearch index updates, and multi-service deployments across staging and production with zero downtime</li>
-      <li><strong>End-to-end execution</strong> – Environment configurations, rollback procedures, cross-team coordination, deployment validation, and post-release monitoring</li>
+    <ul class="dl">
+      <li><strong>Customer onboarding</strong> – Complete OV setup: status mappings, 20+ date/time fields, ETA thresholds, CSV integration from Snowflake</li>
+      <li><strong>Pager management</strong> – All monitoring alerts handled; timely escalations</li>
+      <li><strong>Release management</strong> – Deployment sequences, DB migrations, ES index updates, multi-service deploys with zero downtime</li>
     </ul>
-    <div class="impact-box">
-      <h4>✅ Impact</h4>
-      <ul>
-        <li>Customer onboarding completed without technical blockers</li>
-        <li>Functional alerting infrastructure maintained for platform stability</li>
-        <li>Zero-disruption deployments across multiple production releases</li>
-        <li>Demonstrated reliability and commitment to production excellence</li>
-      </ul>
-    </div>
-    <div class="slideshow" data-ss>
-      <div class="ss-counter"></div>
-      <div class="slides">
-        <div class="slide"><img src="Customer onboarding pagers and Release Management.png" alt="Onboarding & Releases"></div>
-      </div>
-      <div class="ss-dots"></div>
-    </div>
-    <div class="tickets">
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-5277" target="_blank">OV-5277</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-5159" target="_blank">OV-5159</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-5121" target="_blank">OV-5121</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-5060" target="_blank">OV-5060</a>
-    </div>
+    <div class="img-gallery g1"><div class="gi" onclick="openLB(this)"><img src="Customer onboarding pagers and Release Management.png" alt="Releases"></div></div>
+    <div class="tix"><a href="https://fourkites.atlassian.net/browse/OV-5277" target="_blank">OV-5277</a><a href="https://fourkites.atlassian.net/browse/OV-5159" target="_blank">OV-5159</a><a href="https://fourkites.atlassian.net/browse/OV-5121" target="_blank">OV-5121</a><a href="https://fourkites.atlassian.net/browse/OV-5060" target="_blank">OV-5060</a></div>
   </div>
 </section>
 
 <hr class="divider">
 
-<!-- ===== DEMO DATA ===== -->
-<section class="section" id="demo-data">
+<!-- DEMO DATA -->
+<section class="section reveal" id="demo-data">
   <div class="section-title"><span class="st-ico bg-amber">🎯</span> Demo Data Support</div>
-  <div class="section-sub">Comprehensive demo scenarios for customer sales enablement</div>
-
+  <div class="section-sub">Customer-tailored demo scenarios for sales enablement</div>
   <div class="card">
-    <div class="card-head">
-      <div class="card-icon bg-amber">🎬</div>
-      <div><h3>Demo Environments Created</h3><span class="card-tag tag-amber">Sales Enablement</span></div>
-    </div>
-    <ul class="detail-list">
-      <li>Created comprehensive demo scenarios tailored to specific customer use cases and industry requirements</li>
-      <li>Built realistic data sets simulating real-world supply chain workflows including order creation, shipment tracking, delivery ETAs, and exception handling</li>
-      <li>Configured company-specific setups for Western Digital, Grape Supplier, and Levi's with unique business workflows</li>
-      <li>Gained deep product understanding enabling effective demonstration of platform capabilities and edge cases</li>
+    <ul class="dl">
+      <li>Comprehensive scenarios for Western Digital, Grape Supplier, Levi's</li>
+      <li>Realistic supply chain workflows: order creation, shipment tracking, ETAs, exceptions</li>
+      <li>Deep product knowledge enabling effective live demonstrations</li>
     </ul>
-    <div class="impact-box">
-      <h4>💰 Impact</h4>
-      <ul>
-        <li>Demo-driven sales success with industry-tailored scenarios</li>
-        <li>Product expertise enabling effective responses to customer questions during demos</li>
-        <li>Sales team never blocked waiting for demo environments</li>
-      </ul>
+    <div class="img-gallery g2">
+      <div class="gi" onclick="openLB(this)"><img src="Demo Data Support.png" alt="Demo 1"></div>
+      <div class="gi" onclick="openLB(this)"><img src="Demo Data Support2.png" alt="Demo 2"></div>
+      <div class="gi" onclick="openLB(this)"><img src="Demo Data Support3.png" alt="Demo 3"></div>
+      <div class="gi" onclick="openLB(this)"><img src="Demo Data Support4.png" alt="Demo 4"></div>
     </div>
-    <div class="slideshow" data-ss>
-      <div class="ss-counter"></div>
-      <div class="slides">
-        <div class="slide"><img src="Demo Data Support.png" alt="Demo Data 1"></div>
-        <div class="slide"><img src="Demo Data Support2.png" alt="Demo Data 2"></div>
-        <div class="slide"><img src="Demo Data Support3.png" alt="Demo Data 3"></div>
-        <div class="slide"><img src="Demo Data Support4.png" alt="Demo Data 4"></div>
-      </div>
-      <button class="ss-btn ss-prev">‹</button>
-      <button class="ss-btn ss-next">›</button>
-      <div class="ss-dots"></div>
-    </div>
-    <div class="tickets">
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-4994" target="_blank">OV-4994</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-4867" target="_blank">OV-4867</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-4798" target="_blank">OV-4798</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-4768" target="_blank">OV-4768</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-4664" target="_blank">OV-4664</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-4615" target="_blank">OV-4615</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-4614" target="_blank">OV-4614</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-4522" target="_blank">OV-4522</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-5023" target="_blank">OV-5023</a>
-    </div>
+    <div class="tix"><a href="https://fourkites.atlassian.net/browse/OV-4994" target="_blank">OV-4994</a><a href="https://fourkites.atlassian.net/browse/OV-4867" target="_blank">OV-4867</a><a href="https://fourkites.atlassian.net/browse/OV-4798" target="_blank">OV-4798</a><a href="https://fourkites.atlassian.net/browse/OV-4768" target="_blank">OV-4768</a><a href="https://fourkites.atlassian.net/browse/OV-4664" target="_blank">OV-4664</a><a href="https://fourkites.atlassian.net/browse/OV-4671" target="_blank">OV-4671</a></div>
   </div>
 </section>
 
-<!-- ===== PO CONNECT ===== -->
-<section class="section" id="po-connect">
-  <div class="section-title"><span class="st-ico bg-blue">🤝</span> PO Connect &amp; External Team Integration</div>
-  <div class="section-sub">Cross-team collaboration for ISBU, ICT, and Asset Management integrations</div>
-
+<!-- THOUGHTSPOT -->
+<section class="section reveal" id="thoughtspot">
+  <div class="section-title"><span class="st-ico bg-purple">📊</span> Thoughtspot Dashboard</div>
+  <div class="section-sub">AI-trained analytics dashboard delivered in 1 week</div>
   <div class="card">
-    <div class="card-head">
-      <div class="card-icon bg-blue">🔗</div>
-      <div><h3>Integration Work</h3></div>
-    </div>
-    <ul class="detail-list">
-      <li><strong>PO Connect demo data</strong> – 3 orders, 3 deliveries, 1 shipment with automated refresh script for ISBU sales demos</li>
-      <li><strong>OV-AM integration</strong> – Added source parameters in GET API for request tracing; migrated from API key to internal secret authentication</li>
-      <li><strong>ICT demo support</strong> – Complete order datasets and data error resolution for external team demonstrations</li>
-      <li><strong>Multi-company order search</strong> – Enhanced Order API enabling retrieval without specific companyId; added source/app_id tracking for cross-service metrics</li>
+    <div class="card-head"><div class="card-icon bg-purple">📈</div><div><h3>Dashboard</h3><span class="card-tag tag-purple">1-Week Delivery</span></div></div>
+    <ul class="dl">
+      <li>Snowflake data fetch → data modeling → interactive dashboard build</li>
+      <li>Trained Thoughtspot AI model with custom questions for accurate answers</li>
+      <li>Directly used in customer demos contributing to acquisitions</li>
     </ul>
-    <div class="impact-box">
-      <h4>✅ Impact</h4>
-      <ul>
-        <li>Enabled successful PO Connect and ICT demonstrations for sales enablement</li>
-        <li>Improved system observability and security via source tracking and secret auth migration</li>
-        <li>Facilitated seamless OV-AM integration for multi-company order lookups</li>
-      </ul>
-    </div>
-    <div class="slideshow" data-ss>
-      <div class="ss-counter"></div>
-      <div class="slides">
-        <div class="slide"><img src="PO Connect & External Team Integration.png" alt="PO Connect 1"></div>
-        <div class="slide"><img src="PO Connect & External Team Integration2.png" alt="PO Connect 2"></div>
-        <div class="slide"><img src="PO Connect & External Team Integration3.png" alt="PO Connect 3"></div>
-      </div>
-      <button class="ss-btn ss-prev">‹</button>
-      <button class="ss-btn ss-next">›</button>
-      <div class="ss-dots"></div>
-    </div>
-    <div class="tickets">
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-4798" target="_blank">OV-4798</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-4675" target="_blank">OV-4675</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-4664" target="_blank">OV-4664</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-4671" target="_blank">OV-4671</a>
-    </div>
+    <div class="tix"><a href="https://fourkites.atlassian.net/browse/OV-4567" target="_blank">OV-4567</a><a href="https://fourkites.atlassian.net/browse/OV-4552" target="_blank">OV-4552</a><a href="https://fourkites.atlassian.net/browse/OV-5028" target="_blank">OV-5028</a></div>
   </div>
 </section>
 
-<!-- ===== THOUGHTSPOT ===== -->
-<section class="section" id="thoughtspot">
-  <div class="section-title"><span class="st-ico bg-purple">📊</span> Custom Analytics / Thoughtspot Dashboard</div>
-  <div class="section-sub">AI-trained analytics dashboard delivered in 1 week from zero knowledge</div>
-
-  <div class="card">
-    <div class="card-head">
-      <div class="card-icon bg-purple">📈</div>
-      <div><h3>Dashboard Implementation</h3><span class="card-tag tag-purple">1-Week Delivery</span></div>
-    </div>
-    <ul class="detail-list">
-      <li>Fetched existing order visibility data from Snowflake as foundational data source</li>
-      <li>Performed data modeling and training for effective dashboard visualization and querying</li>
-      <li>Built interactive dashboards enabling customers to visualize OV metrics and trends</li>
-      <li>Trained Thoughtspot's AI model with custom questions for customer-specific query accuracy</li>
-      <li>Delivered on time within committed deadline</li>
-    </ul>
-    <div class="impact-box">
-      <h4>💰 Impact</h4>
-      <ul>
-        <li>Important feature for potential customers actively seeking dashboard capabilities</li>
-        <li>Delivered within 1 week meeting sales enablement timeline</li>
-        <li>Directly used in customer demos contributing to acquisitions</li>
-        <li>AI-trained model enables natural language answers on order visibility data</li>
-      </ul>
-    </div>
-    <div class="tickets">
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-4567" target="_blank">OV-4567</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-4552" target="_blank">OV-4552</a>
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-5028" target="_blank">OV-5028</a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== LINE RDD ===== -->
-<section class="section" id="line-rdd">
+<!-- LINE RDD -->
+<section class="section reveal" id="line-rdd">
   <div class="section-title"><span class="st-ico bg-slate">📅</span> Line RDD Date Field Configuration</div>
-  <div class="section-sub">Date-only display configuration for Line Required Delivery Date</div>
-
+  <div class="section-sub">Date-only display for Line Required Delivery Date</div>
   <div class="card">
-    <div class="card-head">
-      <div class="card-icon bg-slate">🗓️</div>
-      <div><h3>Configuration Enhancement</h3></div>
-    </div>
-    <ul class="detail-list">
-      <li>Added configuration support for Line RDD field to display as date-only format, aligning with existing date field display settings</li>
-      <li>Enabled companies to configure Line RDD without time component, matching business reporting preferences</li>
-      <li>Ensured consistent date display across Order Details and Line Items views</li>
-      <li>Aligned with platform-wide timezone and date format settings for global users</li>
+    <ul class="dl">
+      <li>Date-only format config aligning with platform date settings</li>
+      <li>Consistent display across Order Details and Line Items views</li>
+      <li>Platform-wide timezone alignment for global users</li>
     </ul>
-    <div class="tickets">
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-4584" target="_blank">OV-4584</a>
-    </div>
+    <div class="tix"><a href="https://fourkites.atlassian.net/browse/OV-4584" target="_blank">OV-4584</a></div>
   </div>
 </section>
 
 <hr class="divider">
 
-<!-- ===== AI-POWERED ===== -->
-<section class="section" id="ai">
+<!-- AI -->
+<section class="section reveal" id="ai">
   <div class="section-title"><span class="st-ico bg-purple">🤖</span> AI-Powered Development &amp; Productivity</div>
-  <div class="section-sub">Self-initiated AI integration across the entire development lifecycle</div>
-
+  <div class="section-sub">Self-initiated AI integration across the development lifecycle</div>
   <div class="card">
-    <div class="card-head">
-      <div class="card-icon bg-purple">🧠</div>
-      <div><h3>AI Code Guardian Tool</h3><span class="card-tag tag-purple">Team-Wide Tool</span></div>
-    </div>
-    <ul class="detail-list">
-      <li>Built team-wide AI-powered PR analysis tool detecting <strong>16 categories</strong> of critical issues: security vulnerabilities (hardcoded secrets, SQL injection), performance problems (N+1 queries, deadlocks, memory leaks), code quality (null pointers, circular dependencies)</li>
-      <li>Enables <strong>15–30 second</strong> analysis of feature branches before human review</li>
-      <li>Adopted by teammates reducing manual PR review time across the team</li>
+    <div class="card-head"><div class="card-icon bg-purple">🧠</div><div><h3>AI Code Guardian Tool</h3><span class="card-tag tag-purple">Team-Wide</span></div></div>
+    <ul class="dl">
+      <li>PR analysis detecting <strong>16 categories</strong>: security, performance, code quality issues</li>
+      <li><strong>15–30 second</strong> feature branch analysis before human review</li>
+      <li>Adopted by teammates; reduced manual PR review time</li>
     </ul>
   </div>
-
   <div class="card">
-    <div class="card-head">
-      <div class="card-icon bg-blue">⚡</div>
-      <div><h3>AI-Integrated Development Workflow</h3></div>
-    </div>
-    <ul class="detail-list">
-      <li><strong>AI-assisted test generation</strong> – Reduced test writing time by 60%, improved coverage quality by identifying edge cases manual testing would miss</li>
-      <li><strong>Full lifecycle integration</strong> – Code generation for boilerplate (repos, DTOs, mappers), architecture validation for CQRS pattern, optimization suggestions, intelligent refactoring</li>
-      <li><strong>AI-powered debugging</strong> – Production issue root cause analysis (Meijer pipeline log patterns), CloudWatch/Datadog log interpretation, rapid tech learning (Snowflake, Thoughtspot, Protobuf in days)</li>
-      <li><strong>Knowledge sharing</strong> – Regular AI-focused team calls, experimented with emerging tools, shared effective techniques enabling team-wide improvements</li>
+    <div class="card-head"><div class="card-icon bg-blue">⚡</div><div><h3>AI Workflow Integration</h3></div></div>
+    <ul class="dl">
+      <li><strong>Test generation</strong> – 60% reduction in test writing time</li>
+      <li><strong>Full lifecycle</strong> – Boilerplate, architecture validation, refactoring guidance</li>
+      <li><strong>Debugging</strong> – Meijer root cause via log patterns; CloudWatch/Datadog interpretation</li>
+      <li><strong>Knowledge sharing</strong> – AI team calls; shared techniques for team-wide gains</li>
     </ul>
-    <div class="impact-box">
-      <h4>📊 Impact</h4>
-      <ul>
-        <li>Development and code review cycles reduced by 50–60%</li>
-        <li>Production issue resolution reduced from hours to minutes (Meijer fix in 2 days, @PostLoad debugged in hours)</li>
-        <li>Rapid tech adoption (Thoughtspot dashboard in 1 week from zero knowledge)</li>
-        <li>Reduced dependency on senior engineers for reviews and architectural guidance</li>
-      </ul>
-    </div>
-    <div class="slideshow" data-ss>
-      <div class="ss-counter"></div>
-      <div class="slides">
-        <div class="slide"><img src="AI-Powered Development & Productivity.png" alt="AI Productivity 1"></div>
-        <div class="slide"><img src="AI-Powered Development & Productivity2.png" alt="AI Productivity 2"></div>
-        <div class="slide"><img src="AI-Powered Development & Productivity3.png" alt="AI Productivity 3"></div>
-      </div>
-      <button class="ss-btn ss-prev">‹</button>
-      <button class="ss-btn ss-next">›</button>
-      <div class="ss-dots"></div>
+    <div class="ib"><h4>📊 Impact</h4><ul>
+      <li>Dev/review cycles reduced 50–60%</li>
+      <li>Issue resolution: hours → minutes</li>
+      <li>Thoughtspot in 1 week from zero knowledge</li>
+    </ul></div>
+    <div class="img-gallery g1">
+      <div class="gi" onclick="openLB(this)"><img src="AI-Powered Development & Productivity.png" alt="AI 1"></div>
+      <div class="gi" onclick="openLB(this)"><img src="AI-Powered Development & Productivity2.png" alt="AI 2"></div>
+      <div class="gi" onclick="openLB(this)"><img src="AI-Powered Development & Productivity3.png" alt="AI 3"></div>
     </div>
   </div>
 </section>
 
-<!-- ===== HACKATHON ===== -->
-<section class="section" id="hackathon">
+<!-- HACKATHON -->
+<section class="section reveal" id="hackathon">
   <div class="section-title"><span class="st-ico bg-green">🏆</span> Automation Hackathon</div>
-  <div class="section-sub">2-day AI-based automation hackathon – coverage from 19% to ~78%</div>
-
+  <div class="section-sub">2-day AI hackathon: 19% → 78% backend coverage</div>
   <div class="card">
-    <div class="card-head">
-      <div class="card-icon bg-green">🤖</div>
-      <div><h3>Hackathon Contributions</h3><span class="card-tag tag-green">19% → 78% Coverage</span></div>
-    </div>
-    <ul class="detail-list">
-      <li>Identified and automated <strong>10+ high-priority test cases</strong> during 2-day hackathon</li>
-      <li>Owned complex "Order ETA Calculation" suite – validated day-based calculations for single and multi-shipment scenarios</li>
-      <li>Developed automated validation for isExist and Delivery Get APIs</li>
-      <li>Implemented TestRail integration workflow automating test case creation and result uploading</li>
-      <li>Enabled parallel test execution within CI/CD pipelines reducing feedback times</li>
-      <li>Unified quality reporting bridging Services and Workers into single visibility layer</li>
+    <div class="card-head"><div class="card-icon bg-green">🤖</div><div><h3>Contributions</h3><span class="card-tag tag-green">19→78%</span></div></div>
+    <ul class="dl">
+      <li>Automated 10+ high-priority test cases</li>
+      <li>Owned "Order ETA Calculation" suite for single/multi-shipment validation</li>
+      <li>TestRail integration for automated test case creation and result uploads</li>
+      <li>Parallel execution in CI/CD; unified Services + Workers quality reporting</li>
     </ul>
-    <div class="impact-box">
-      <h4>📊 Impact</h4>
-      <ul>
-        <li>Backend coverage improved from 19% to ~78% – significantly increased release confidence</li>
-        <li>Faster feedback loops with parallel execution enabling quicker releases</li>
-        <li>Full traceability from code to test management via TestRail integration</li>
-      </ul>
-    </div>
-    <div class="slideshow" data-ss>
-      <div class="ss-counter"></div>
-      <div class="slides">
-        <div class="slide"><img src="Automation Hackathon.png" alt="Automation Hackathon"></div>
-      </div>
-      <div class="ss-dots"></div>
-    </div>
-    <div class="tickets">
-      <a class="ticket" href="https://fourkites.atlassian.net/browse/OV-5212" target="_blank">OV-5212</a>
-    </div>
+    <div class="img-gallery g1"><div class="gi" onclick="openLB(this)"><img src="Automation Hackathon.png" alt="Hackathon"></div></div>
+    <div class="tix"><a href="https://fourkites.atlassian.net/browse/OV-5212" target="_blank">OV-5212</a></div>
   </div>
 </section>
 
 <hr class="divider">
 
-<!-- ===== AUTONOMY ===== -->
-<section class="section" id="autonomy">
+<!-- AUTONOMY -->
+<section class="section reveal" id="autonomy">
   <div class="section-title"><span class="st-ico bg-blue">🧭</span> Autonomy: Independent with Minimal Guidance</div>
-  <div class="section-sub">Demonstrated consistent independence across learning, architecture, debugging, and delivery</div>
-
+  <div class="section-sub">Consistent independence in learning, architecture, debugging, and delivery</div>
   <div class="card">
     <div class="sub-grid">
-      <div class="sub-card">
-        <h4>🎓 Independent Learning</h4>
-        <ul class="detail-list">
-          <li>Picked up Snowflake, Thoughtspot, and Protobuf independently and delivered working implementations</li>
-          <li>Proposed CQRS pattern for Read Adapter; got validation after implementation</li>
-        </ul>
-      </div>
-      <div class="sub-card">
-        <h4>🔍 Independent Debugging</h4>
-        <ul class="detail-list">
-          <li>Analyzed CloudWatch/Datadog metrics to resolve Meijer pipeline lag (1,000/sec → 10/sec) without escalation</li>
-          <li>Resolved @PostLoad issue achieving 16+ days zero DB alerts independently</li>
-        </ul>
-      </div>
-      <div class="sub-card">
-        <h4>📋 Stakeholder Engagement</h4>
-        <ul class="detail-list">
-          <li>Gathered requirements from product and sales teams directly, reducing iterations</li>
-          <li>Managed multiple parallel workstreams with self-estimated timelines</li>
-        </ul>
-      </div>
-      <div class="sub-card">
-        <h4>⚡ Delivery Speed</h4>
-        <ul class="detail-list">
-          <li>Features delivered with minimal senior guidance – limited to code reviews only</li>
-          <li>Meijer pipeline fix: 2 days from identification to deployment</li>
-          <li>100% on-time delivery without timeline extensions</li>
-        </ul>
-      </div>
+      <div class="sub-card"><h4>🎓 Independent Learning</h4><ul class="dl">
+        <li>Snowflake, Thoughtspot, Protobuf – learned and delivered independently</li>
+        <li>Proposed CQRS for Read Adapter; validated after implementation</li>
+      </ul></div>
+      <div class="sub-card"><h4>🔍 Independent Debugging</h4><ul class="dl">
+        <li>Meijer pipeline: 1,000/sec → 10/sec without escalation</li>
+        <li>@PostLoad fix: 16+ days zero DB alerts</li>
+      </ul></div>
+      <div class="sub-card"><h4>📋 Stakeholder Work</h4><ul class="dl">
+        <li>Direct requirements gathering from product/sales teams</li>
+        <li>Self-estimated timelines across parallel workstreams</li>
+      </ul></div>
+      <div class="sub-card"><h4>⚡ Delivery Speed</h4><ul class="dl">
+        <li>Minimal senior guidance – code reviews only</li>
+        <li>Meijer fix: 2 days identification → deployment</li>
+        <li>100% on-time, zero extensions</li>
+      </ul></div>
     </div>
-    <div class="slideshow" data-ss style="margin-top:20px">
-      <div class="ss-counter"></div>
-      <div class="slides">
-        <div class="slide"><img src="Autonomy Independent with Minimal Guidance.png" alt="Autonomy 1"></div>
-        <div class="slide"><img src="Autonomy Independent with Minimal Guidance21.png" alt="Autonomy 2"></div>
-        <div class="slide"><img src="Autonomy Independent with Minimal Guidance22.png" alt="Autonomy 3"></div>
-      </div>
-      <button class="ss-btn ss-prev">‹</button>
-      <button class="ss-btn ss-next">›</button>
-      <div class="ss-dots"></div>
+    <div class="img-gallery g1" style="margin-top:12px">
+      <div class="gi" onclick="openLB(this)"><img src="Autonomy Independent with Minimal Guidance.png" alt="Autonomy 1"></div>
+      <div class="gi" onclick="openLB(this)"><img src="Autonomy Independent with Minimal Guidance21.png" alt="Autonomy 2"></div>
+      <div class="gi" onclick="openLB(this)"><img src="Autonomy Independent with Minimal Guidance22.png" alt="Autonomy 3"></div>
     </div>
   </div>
 </section>
 
-<!-- ===== PROFICIENCY ===== -->
-<section class="section" id="proficiency">
+<!-- PROFICIENCY -->
+<section class="section reveal" id="proficiency">
   <div class="section-title"><span class="st-ico bg-green">💻</span> Technical Proficiency</div>
-  <div class="section-sub">Demonstrated mastery across multiple technologies delivering production-critical systems</div>
-
+  <div class="section-sub">Production-critical mastery across multiple technologies</div>
   <div class="card">
     <div class="proficiency-grid">
-      <div class="prof-card">
-        <h4>☕ Java <span class="prof-badge tag-blue">Primary</span></h4>
-        <ul class="detail-list">
-          <li>CQRS with custom DataSourceRetryWrapper for intelligent failover</li>
-          <li>Production-grade entity listeners; @PostLoad fix for DB overload</li>
-          <li>Event-driven Kafka pipelines with protobuf and dead-letter queues</li>
-        </ul>
-        <p style="font-size:.75rem;color:var(--grn);margin-top:8px;font-weight:600">→ Delivered Read Adapter, Callbacks, Pipedream directly contributing to $55K+ deals</p>
-      </div>
-      <div class="prof-card">
-        <h4>🐘 PostgreSQL <span class="prof-badge tag-green">Advanced</span></h4>
-        <ul class="detail-list">
-          <li>Read/write separation with 4:1 connection ratio for horizontal scaling</li>
-          <li>Optimized 30s queries to 4–6s through indexing and restructuring</li>
-          <li>Schema evolution via Liquibase; PG 13→16 fleet upgrade with zero downtime</li>
-        </ul>
-        <p style="font-size:.75rem;color:var(--grn);margin-top:8px;font-weight:600">→ Supports 500 concurrent users and 4,000+ line items per order</p>
-      </div>
-      <div class="prof-card">
-        <h4>🔍 Elasticsearch <span class="prof-badge tag-purple">Applied</span></h4>
-        <ul class="detail-list">
-          <li>Extended indexing for company-specific dynamic order statuses</li>
-          <li>Built aggregation queries for real-time OV dashboards</li>
-        </ul>
-        <p style="font-size:.75rem;color:var(--grn);margin-top:8px;font-weight:600">→ Unblocked Dollarcity ($29K) onboarding</p>
-      </div>
-      <div class="prof-card">
-        <h4>📊 SQL &amp; Agile <span class="prof-badge tag-amber">Proficient</span></h4>
-        <ul class="detail-list">
-          <li>Optimized high-volume queries (1,000/sec → 10/sec) via profiling</li>
-          <li>Queries handling 4,000+ line items without degradation</li>
-          <li>100% on-time delivery across all owned features</li>
-        </ul>
-        <p style="font-size:.75rem;color:var(--grn);margin-top:8px;font-weight:600">→ Eliminated Meijer complaints; managed parallel workstreams independently</p>
-      </div>
+      <div class="prof-card"><h4>☕ Java <span class="prof-badge tag-blue">Primary</span></h4><ul class="dl">
+        <li>CQRS with DataSourceRetryWrapper</li>
+        <li>Entity listeners; @PostLoad fix</li>
+        <li>Kafka + protobuf + dead-letter queues</li>
+      </ul><p style="font-size:.72rem;color:var(--grn);margin-top:5px;font-weight:600">→ $55K+ deal features delivered</p></div>
+      <div class="prof-card"><h4>🐘 PostgreSQL <span class="prof-badge tag-green">Advanced</span></h4><ul class="dl">
+        <li>4:1 read/write separation</li>
+        <li>30s → 4s query optimization</li>
+        <li>PG 13→16 fleet upgrade</li>
+      </ul><p style="font-size:.72rem;color:var(--grn);margin-top:5px;font-weight:600">→ 500 concurrent users supported</p></div>
+      <div class="prof-card"><h4>🔍 Elasticsearch <span class="prof-badge tag-purple">Applied</span></h4><ul class="dl">
+        <li>Dynamic status indexing</li>
+        <li>Real-time dashboard aggregations</li>
+      </ul><p style="font-size:.72rem;color:var(--grn);margin-top:5px;font-weight:600">→ Dollarcity $29K unblocked</p></div>
+      <div class="prof-card"><h4>📊 SQL & Agile <span class="prof-badge tag-amber">Proficient</span></h4><ul class="dl">
+        <li>1,000/sec → 10/sec optimization</li>
+        <li>4,000+ line items, zero degradation</li>
+        <li>100% on-time delivery</li>
+      </ul></div>
     </div>
   </div>
 </section>
 
-<!-- ===== PRESENTATION & DOCS ===== -->
-<section class="section" id="qualities">
-  <div class="section-title"><span class="st-ico bg-amber">🎤</span> Presentation, Documentation &amp; Task Management</div>
-  <div class="section-sub">Consistently communicated complex work clearly and delivered on committed timelines</div>
-
+<!-- QUALITIES -->
+<section class="section reveal" id="qualities">
+  <div class="section-title"><span class="st-ico bg-amber">🎤</span> Presentation, Docs &amp; Task Mgmt</div>
+  <div class="section-sub">Clear communication, thorough documentation, reliable delivery</div>
   <div class="card">
     <div class="sub-grid">
-      <div class="sub-card">
-        <h4>🎤 Presentation</h4>
-        <ul class="detail-list">
-          <li>Presented feature implementations in sprint demos explaining technical decisions and business value</li>
-          <li>Demonstrated Read Adapter, Callbacks, Pipedream to stakeholders and product teams</li>
-          <li>Always volunteered for presentations, communicating complex concepts to non-technical audiences</li>
-        </ul>
-      </div>
-      <div class="sub-card">
-        <h4>📝 Documentation</h4>
-        <ul class="detail-list">
-          <li>Documented Order and Delivery Callbacks with end-to-end flow and payload structures</li>
-          <li>Created GS1 API documentation covering Create, Upsert, and Update operations</li>
-          <li>Reduced onboarding time and tribal knowledge dependency</li>
-        </ul>
-      </div>
-      <div class="sub-card" style="grid-column:1/-1">
-        <h4>📋 Task Management</h4>
-        <ul class="detail-list">
-          <li>Broke down complex features into deliverable chunks with clear milestones and dependencies</li>
-          <li>Delivered Thoughtspot dashboard in 1 week: Snowflake data → Data modeling (3rd–7th Jan) → Dashboard build (7th–8th Jan)</li>
-          <li>Managed parallel workstreams (features, production fixes, demos) by prioritizing and time-boxing effectively</li>
-          <li>Zero missed deadlines across all owned features and optimizations</li>
-        </ul>
-      </div>
+      <div class="sub-card"><h4>🎤 Presentation</h4><ul class="dl">
+        <li>Sprint demos with technical + business context</li>
+        <li>Volunteered for all feature presentations</li>
+      </ul></div>
+      <div class="sub-card"><h4>📝 Documentation</h4><ul class="dl">
+        <li>Callbacks end-to-end flow + payload docs</li>
+        <li>GS1 API Create/Upsert/Update docs</li>
+      </ul></div>
+      <div class="sub-card" style="grid-column:1/-1"><h4>📋 Task Management</h4><ul class="dl">
+        <li>Thoughtspot in 1 week: phased delivery with checkpoints</li>
+        <li>Parallel workstreams managed with zero missed deadlines</li>
+      </ul></div>
     </div>
-    <div class="slideshow" data-ss style="margin-top:16px">
-      <div class="ss-counter"></div>
-      <div class="slides">
-        <div class="slide"><img src="Presentation Documentation Task Mgm.png" alt="Presentation Docs Task Mgmt"></div>
-      </div>
-      <div class="ss-dots"></div>
-    </div>
+    <div class="img-gallery g1" style="margin-top:10px"><div class="gi" onclick="openLB(this)"><img src="Presentation Documentation Task Mgm.png" alt="Presentation"></div></div>
   </div>
 </section>
 
-<!-- ===== CODE QUALITY & DELIVERY ===== -->
-<section class="section" id="quality">
-  <div class="section-title"><span class="st-ico bg-green">✅</span> Code Quality, Delivery &amp; Timeline</div>
-  <div class="section-sub">Consistent high-quality, on-time deliveries across all projects</div>
-
+<!-- CODE QUALITY -->
+<section class="section reveal" id="quality">
+  <div class="section-title"><span class="st-ico bg-green">✅</span> Code Quality &amp; Delivery</div>
+  <div class="section-sub">High-quality, on-time deliveries across all projects</div>
   <div class="card">
     <div class="sub-grid">
-      <div class="sub-card">
-        <h4>🏗️ Code Quality</h4>
-        <ul class="detail-list">
-          <li><strong>Read Adapter</strong> – CQRS with clear separation of concerns; reference implementation for future features</li>
-          <li><strong>Pipedream</strong> – Comprehensive error handling with structured logging; debugging time from hours to minutes</li>
-          <li><strong>Callbacks</strong> – Protobuf adoption reduced payload size by 40%; improved delivery performance</li>
-          <li><strong>@PostLoad Fix</strong> – Separated listeners improved readability; future inventory changes 60% faster to implement</li>
-          <li><strong>Pipeline</strong> – Source-level deduplication prevented cascading issues across 5+ downstream consumers</li>
-        </ul>
-      </div>
-      <div class="sub-card">
-        <h4>🚀 Delivery &amp; Timeline</h4>
-        <ul class="detail-list">
-          <li><strong>Thoughtspot</strong> – 3-phase delivery (fetch → model → dashboard) with working output at each checkpoint</li>
-          <li><strong>Hackathon</strong> – 59% coverage improvement within 1-week timeline while balancing sprint work</li>
-          <li><strong>Dynamic Status</strong> – Coordinated FE/BE across 4 modules; zero integration bugs post-release</li>
-          <li><strong>Meijer Fix</strong> – 2-day turnaround from identification to deployment</li>
-          <li><strong>Demo Data</strong> – Environments ready ahead of scheduled sales calls</li>
-        </ul>
-      </div>
+      <div class="sub-card"><h4>🏗️ Code Quality</h4><ul class="dl">
+        <li><strong>Read Adapter</strong> – Reference CQRS implementation</li>
+        <li><strong>Pipedream</strong> – Structured logging; hours→mins debug</li>
+        <li><strong>Callbacks</strong> – Protobuf: 40% payload reduction</li>
+        <li><strong>@PostLoad</strong> – Separated listeners; 60% faster changes</li>
+        <li><strong>Pipeline</strong> – Source dedup across 5+ consumers</li>
+      </ul></div>
+      <div class="sub-card"><h4>🚀 Timeline</h4><ul class="dl">
+        <li><strong>Thoughtspot</strong> – 3-phase with checkpoints</li>
+        <li><strong>Hackathon</strong> – 59% coverage in 1 week</li>
+        <li><strong>Dynamic Status</strong> – 4 modules, zero bugs</li>
+        <li><strong>Meijer</strong> – 2-day turnaround</li>
+        <li><strong>Demos</strong> – Ready before sales calls</li>
+      </ul></div>
     </div>
-    <div class="slideshow" data-ss style="margin-top:16px">
-      <div class="ss-counter"></div>
-      <div class="slides">
-        <div class="slide"><img src="Code Quality Delivery & Timeline.png" alt="Code Quality Delivery Timeline"></div>
-      </div>
-      <div class="ss-dots"></div>
-    </div>
+    <div class="img-gallery g1" style="margin-top:10px"><div class="gi" onclick="openLB(this)"><img src="Code Quality Delivery & Timeline.png" alt="Quality"></div></div>
   </div>
 </section>
 
-<!-- FOOTER -->
-<div style="text-align:center;padding:40px 0 20px;color:var(--g400);font-size:.75rem;border-top:1px solid var(--g200);margin-top:40px">
-  <p style="font-weight:600;color:var(--g600);margin-bottom:4px">Shreya Dhanta · Software Engineer II · Order Visibility Platform</p>
+<div class="footer">
+  <p><b>Shreya Dhanta · Software Engineer II · Order Visibility Platform</b></p>
   <p>Promotion Review 2025–2026 · FourKites</p>
 </div>
 
-</div><!-- end content -->
+</div>
 </main>
 
 <script>
-// Sidebar toggle
-function toggleSidebar(){
-  document.getElementById('sidebar').classList.toggle('open');
-  document.querySelector('.overlay').classList.toggle('show');
-}
+function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.querySelector('.overlay').classList.toggle('show')}
 
-// Active nav tracking
+// Active nav
 const navLinks=document.querySelectorAll('.side-nav a[href^="#"]');
-const sections=document.querySelectorAll('.section, .hero');
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      const id=e.target.getAttribute('id');
-      navLinks.forEach(l=>{l.classList.toggle('active',l.getAttribute('href')==='#'+id)});
-    }
-  });
-},{rootMargin:'-20% 0px -70% 0px'});
-sections.forEach(s=>obs.observe(s));
+const secs=document.querySelectorAll('.section,.hero');
+new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){const id=e.target.id;navLinks.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+id))}})},{rootMargin:'-20% 0px -70% 0px'}).observe&&secs.forEach(s=>new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){navLinks.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id))}})},{rootMargin:'-20% 0px -70% 0px'}).observe(s));
 
-// Close sidebar on link click (mobile)
-navLinks.forEach(l=>l.addEventListener('click',()=>{
-  document.getElementById('sidebar').classList.remove('open');
-  document.querySelector('.overlay').classList.remove('show');
-}));
+navLinks.forEach(l=>l.addEventListener('click',()=>{document.getElementById('sidebar').classList.remove('open');document.querySelector('.overlay').classList.remove('show')}));
 
-// Slideshow
-document.querySelectorAll('[data-ss]').forEach(ss=>{
-  const slides=ss.querySelector('.slides');
-  const all=ss.querySelectorAll('.slide');
-  const dots=ss.querySelector('.ss-dots');
-  const counter=ss.querySelector('.ss-counter');
-  const prev=ss.querySelector('.ss-prev');
-  const next=ss.querySelector('.ss-next');
-  let cur=0;
-  if(all.length<2){if(prev)prev.style.display='none';if(next)next.style.display='none';}
-  all.forEach((_,i)=>{const d=document.createElement('button');d.className='ss-dot'+(i===0?' active':'');d.onclick=()=>go(i);dots.appendChild(d)});
-  function go(n){cur=n;slides.style.transform=`translateX(-${cur*100}%)`;dots.querySelectorAll('.ss-dot').forEach((d,i)=>d.classList.toggle('active',i===cur));if(counter)counter.textContent=`${cur+1} / ${all.length}`;}
-  if(prev)prev.onclick=()=>go((cur-1+all.length)%all.length);
-  if(next)next.onclick=()=>go((cur+1)%all.length);
-  go(0);
-});
+// Scroll reveal
+const revealObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revealObs.unobserve(e.target)}})},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
+
+// Timeline animation
+const tlObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){document.getElementById('timeline').classList.add('animated');tlObs.unobserve(e.target)}})},{threshold:.3});
+tlObs.observe(document.getElementById('tl-section'));
+
+// Animated counters
+function animateCounters(){document.querySelectorAll('.met .num[data-count]').forEach(el=>{const end=parseFloat(el.dataset.count),pre=el.dataset.prefix||'',suf=el.dataset.suffix||'';let cur=0;const step=end/40,isFloat=end%1!==0;const iv=setInterval(()=>{cur+=step;if(cur>=end){cur=end;clearInterval(iv)}el.textContent=pre+(isFloat?cur.toFixed(1):Math.round(cur))+suf},30)})}
+setTimeout(animateCounters,600);
+
+// Lightbox
+function openLB(el){const img=el.querySelector('img');if(!img)return;const lb=document.getElementById('lightbox');document.getElementById('lb-img').src=img.src;lb.classList.add('show');document.body.style.overflow='hidden'}
+function closeLB(){document.getElementById('lightbox').classList.remove('show');document.body.style.overflow=''}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLB()});
 </script>
 </body>
-</html>
+</html><a href="https://fourkites.atlassian.net/browse/OV-4615" target="_blank">OV-4615</a><a href="https://fourkites.atlassian.net/browse/OV-4614" target="_blank">OV-4614</a><a href="https://fourkites.atlassian.net/browse/OV-4522" target="_blank">OV-4522</a><a href="https://fourkites.atlassian.net/browse/OV-5023" target="_blank">OV-5023</a></div>
+  </div>
+</section>
+
+<!-- PO CONNECT -->
+<section class="section reveal" id="po-connect">
+  <div class="section-title"><span class="st-ico bg-blue">🤝</span> PO Connect &amp; External Integration</div>
+  <div class="section-sub">ISBU, ICT, and Asset Management cross-team work</div>
+  <div class="card">
+    <ul class="dl">
+      <li><strong>PO Connect</strong> – 3 orders, 3 deliveries, 1 shipment with refresh script for ISBU demos</li>
+      <li><strong>OV-AM</strong> – Source tracking in GET API; API key → internal secret auth migration</li>
+      <li><strong>ICT support</strong> – Order datasets and error resolution for external demos</li>
+      <li><strong>Multi-company search</strong> – Order retrieval without companyId; source/app_id tracking</li>
+    </ul>
+    <div class="img-gallery g1">
+      <div class="gi" onclick="openLB(this)"><img src="PO Connect & External Team Integration.png" alt="PO 1"></div>
+      <div class="gi" onclick="openLB(this)"><img src="PO Connect & External Team Integration2.png" alt="PO 2"></div>
+      <div class="gi" onclick="openLB(this)"><img src="PO Connect & External Team Integration3.png" alt="PO 3"></div>
+    </div>
+    <div class="tix"><a href="https://fourkites.atlassian.net/browse/OV-4798" target="_blank">OV-4798</a><a href="https://fourkites.atlassian.net/browse/OV-4675" target="_blank">OV-4675</a><a href="https://fourkites.atlassian.net/browse/OV-4664" target="_blank">OV-4664</a>
