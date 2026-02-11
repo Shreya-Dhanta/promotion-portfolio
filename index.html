@@ -4,248 +4,358 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Shreya Dhanta – Promotion Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* --- CORE STYLES --- */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        
         :root {
-            --pri: #2563eb;
-            --pri-d: #1e40af;
-            --pri-l: #dbeafe;
-            --acc: #7c3aed;
-            --g50: #f8fafc;
-            --g100: #f1f5f9;
-            --g200: #e2e8f0;
-            --g800: #1e293b;
-            --g900: #0f172a;
-            --side-w: 280px;
-            --glass: rgba(255, 255, 255, 0.8);
+            --pri: #2563eb; --pri-d: #1e40af; --pri-l: #dbeafe; --pri-xl: #eff6ff;
+            --acc: #7c3aed; --acc-l: #ede9fe;
+            --g50: #f8fafc; --g100: #f1f5f9; --g200: #e2e8f0; --g400: #94a3b8; --g600: #475569; --g800: #1e293b; --g900: #0f172a;
+            --grn: #059669; --grn-l: #d1fae5; --amb: #d97706; --amb-l: #fef3c7; --red: #dc2626; --red-l: #fee2e2;
+            --side-w: 280px; --rad: 20px;
             --shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+            --glass: rgba(255, 255, 255, 0.85);
         }
 
-        html { scroll-behavior: smooth; font-size: 16px; }
-        body { 
-            font-family: 'Inter', system-ui, sans-serif; 
-            background: var(--g50); 
-            color: var(--g800); 
-            line-height: 1.6; 
-            overflow-x: hidden; 
-        }
+        html { scroll-behavior: smooth; font-size: 15px; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--g50); color: var(--g800); line-height: 1.6; }
 
-        /* --- Animations --- */
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        /* --- ANIMATIONS --- */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        .reveal { opacity: 0; transform: translateY(20px); transition: 0.6s ease-out; }
         .reveal.visible { opacity: 1; transform: translateY(0); }
 
-        /* --- Sidebar (Glassmorphism) --- */
-        .sidebar { 
-            position: fixed; top: 0; left: 0; width: var(--side-w); height: 100vh; 
-            background: var(--glass); backdrop-filter: blur(10px); 
-            border-right: 1px solid var(--g200); z-index: 100; 
-            display: flex; flex-direction: column; transition: transform 0.3s; 
-        }
-        .side-head { padding: 30px 20px; text-align: left; }
-        .side-head h2 { font-size: 1.2rem; font-weight: 800; color: var(--pri); letter-spacing: -0.5px; }
-        .side-nav { flex: 1; overflow-y: auto; padding: 10px 0; }
-        .side-nav a { 
-            display: flex; align-items: center; gap: 12px; padding: 10px 20px; 
-            font-size: 0.85rem; color: #64748b; text-decoration: none; 
-            transition: 0.2s; font-weight: 500; 
-        }
-        .side-nav a:hover, .side-nav a.active { color: var(--pri); background: #fff; box-shadow: var(--shadow); }
-        .ng { padding: 20px 20px 5px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: #94a3b8; letter-spacing: 1px; }
+        /* --- SIDEBAR --- */
+        .sidebar { position: fixed; top: 0; left: 0; width: var(--side-w); height: 100vh; background: var(--glass); backdrop-filter: blur(12px); border-right: 1px solid var(--g200); z-index: 100; display: flex; flex-direction: column; transition: transform 0.3s; }
+        .side-head { padding: 30px 24px; }
+        .side-head h2 { font-size: 1.1rem; font-weight: 800; color: var(--g900); letter-spacing: -0.5px; }
+        .side-nav { flex: 1; overflow-y: auto; padding-bottom: 30px; }
+        .side-nav a { display: flex; align-items: center; gap: 10px; padding: 8px 24px; font-size: 0.8rem; color: var(--g600); text-decoration: none; font-weight: 500; transition: 0.2s; }
+        .side-nav a:hover { color: var(--pri); background: #fff; }
+        .side-nav a.active { color: var(--pri); background: #fff; font-weight: 700; box-shadow: var(--shadow); }
+        .ng { padding: 18px 24px 6px; font-size: 0.65rem; font-weight: 800; color: var(--g400); text-transform: uppercase; letter-spacing: 1px; }
 
-        /* --- Main Content --- */
+        /* --- BURGER (MOBILE) --- */
+        .burger { display: none; position: fixed; top: 15px; right: 15px; z-index: 200; background: #fff; border: 1px solid var(--g200); border-radius: 8px; padding: 10px; cursor: pointer; box-shadow: var(--shadow); }
+        .burger span { display: block; width: 20px; height: 2px; background: var(--g700); margin: 4px 0; }
+
+        /* --- HERO --- */
         .main { margin-left: var(--side-w); min-height: 100vh; }
+        .hero { background: radial-gradient(circle at top right, #3b82f6, #2563eb, #1e3a8a); color: #fff; padding: 80px 40px 100px; text-align: center; border-radius: 0 0 40px 40px; position: relative; overflow: hidden; }
+        .hero-tag { display: inline-block; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 6px 16px; border-radius: 30px; font-size: 0.7rem; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; }
+        .hero h1 { font-size: 3rem; font-weight: 800; letter-spacing: -1.5px; margin-bottom: 10px; }
+        .hero p { font-size: 1.1rem; opacity: 0.9; font-weight: 300; }
 
-        /* --- Upgraded Hero --- */
-        .hero { 
-            background: radial-gradient(circle at top right, #3b82f6, #2563eb), #1e3a8a; 
-            color: #fff; padding: 100px 40px; text-align: center; position: relative; 
-            border-radius: 0 0 40px 40px; 
-        }
-        .hero h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -2px; line-height: 1; margin-bottom: 20px; animation: fadeUp 1s; }
-        .hero .name { font-size: 1.2rem; font-weight: 400; opacity: 0.9; margin-bottom: 5px; }
-        .hero .tag { 
-            display: inline-block; background: rgba(255,255,255,0.15); 
-            padding: 6px 15px; border-radius: 30px; font-size: 0.75rem; 
-            font-weight: 600; margin-bottom: 20px; backdrop-filter: blur(5px);
-        }
+        /* --- NEO BENTO METRICS --- */
+        .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 1100px; margin: -50px auto 40px; padding: 0 24px; }
+        .met { background: #fff; padding: 24px; border-radius: var(--rad); border: 1px solid var(--g200); box-shadow: var(--shadow); transition: 0.3s; }
+        .met:hover { transform: translateY(-5px); border-color: var(--pri); }
+        .met.featured { grid-column: span 2; background: linear-gradient(135deg, #fff, var(--pri-xl)); }
+        .met .num { font-size: 2rem; font-weight: 800; color: var(--g900); display: block; }
+        .met.featured .num { font-size: 3rem; color: var(--pri); line-height: 1; margin-bottom: 5px; }
+        .met .lbl { font-size: 0.7rem; font-weight: 700; color: var(--g600); text-transform: uppercase; letter-spacing: 0.5px; }
 
-        /* --- Neo-Bento Metrics --- */
-        .metrics { 
-            display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; 
-            max-width: 1100px; margin: -60px auto 40px; padding: 0 20px; 
-        }
-        .met { 
-            background: #fff; padding: 30px 20px; border-radius: 24px; 
-            text-align: center; box-shadow: var(--shadow); transition: 0.3s; border: 1px solid #fff;
-        }
-        .met:hover { transform: translateY(-10px); border-color: var(--pri); }
-        .met.featured { grid-column: span 2; background: linear-gradient(135deg, #fff 0%, #eff6ff 100%); }
-        .met .num { font-size: 2.2rem; font-weight: 800; color: var(--g900); display: block; letter-spacing: -1px; }
-        .met.featured .num { font-size: 3.5rem; color: var(--pri); }
-        .met .lbl { font-size: 0.75rem; font-weight: 600; color: #64748b; text-transform: uppercase; margin-top: 5px; }
-
-        /* --- Timeline & Cards --- */
-        .content { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+        /* --- CONTENT AREA --- */
+        .content { max-width: 1000px; margin: 0 auto; padding: 40px 24px; }
         .section { margin-bottom: 60px; scroll-margin-top: 40px; }
-        .section-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 20px; display: flex; align-items: center; gap: 15px; }
-        .card { 
-            background: #fff; border: 1px solid var(--g200); border-radius: 24px; 
-            padding: 40px; margin-bottom: 20px; box-shadow: var(--shadow); position: relative; 
-        }
-        .fb { 
-            position: absolute; top: 20px; right: 20px; background: var(--pri); 
-            color: #fff; padding: 5px 15px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; 
-        }
-        .ib { background: #f1f5f9; border-radius: 16px; padding: 20px; margin-top: 20px; border-left: 4px solid var(--pri); }
-        .ib h4 { font-size: 0.8rem; text-transform: uppercase; margin-bottom: 10px; color: var(--pri); }
+        .section-title { font-size: 1.5rem; font-weight: 800; color: var(--g900); margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+        .si { width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
         
+        /* --- CARDS --- */
+        .card { background: #fff; border: 1px solid var(--g200); border-radius: var(--rad); padding: 32px; margin-bottom: 20px; box-shadow: var(--shadow); position: relative; }
+        .fb { position: absolute; top: 20px; right: 24px; background: var(--pri); color: #fff; font-size: 0.65rem; font-weight: 800; padding: 4px 12px; border-radius: 20px; animation: float 4s infinite; }
+        
+        .ch { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 20px; }
+        .ch h3 { font-size: 1.1rem; font-weight: 700; color: var(--g900); }
+        .ct { font-size: 0.6rem; font-weight: 800; padding: 2px 10px; border-radius: 8px; text-transform: uppercase; background: var(--g100); color: var(--g600); margin-top: 4px; display: inline-block; }
+
         .dl { list-style: none; }
-        .dl li { position: relative; padding-left: 25px; margin-bottom: 10px; font-size: 0.95rem; }
+        .dl li { position: relative; padding-left: 24px; margin-bottom: 12px; font-size: 0.9rem; color: var(--g600); }
         .dl li::before { content: '→'; position: absolute; left: 0; color: var(--pri); font-weight: 800; }
+        .dl li strong { color: var(--g900); }
 
-        .tix { display: flex; gap: 10px; margin-top: 20px; }
-        .tix a { font-size: 0.7rem; color: var(--pri); background: var(--pri-l); padding: 5px 12px; border-radius: 8px; text-decoration: none; font-weight: 700; }
+        .ib { background: var(--g50); border-radius: 16px; padding: 20px; margin-top: 24px; border-left: 4px solid var(--pri); }
+        .ib h4 { font-size: 0.75rem; text-transform: uppercase; color: var(--pri); margin-bottom: 8px; letter-spacing: 0.5px; }
+        .ib ul { list-style: none; }
+        .ib li { font-size: 0.85rem; margin-bottom: 4px; color: var(--g800); position: relative; padding-left: 18px; }
+        .ib li::before { content: '✓'; position: absolute; left: 0; color: var(--grn); font-weight: 900; }
 
-        /* Responsive */
-        @media(max-width: 1024px) {
+        .rv { display: inline-flex; align-items: center; gap: 8px; background: var(--amb-l); color: var(--amb); padding: 6px 16px; border-radius: 30px; font-size: 0.75rem; font-weight: 800; margin-top: 15px; }
+
+        .tix { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+        .tix a { font-size: 0.7rem; font-weight: 700; background: var(--pri-l); color: var(--pri-d); padding: 4px 10px; border-radius: 6px; text-decoration: none; transition: 0.2s; }
+        .tix a:hover { background: var(--pri); color: #fff; }
+
+        /* --- GRID HELPERS --- */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .compact-card { padding: 20px; background: #fff; border: 1px solid var(--g200); border-radius: 12px; }
+        .compact-card h4 { font-size: 0.9rem; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+
+        /* --- LIGHTBOX --- */
+        .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 1000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
+        .lightbox.show { display: flex; }
+        .lightbox img { max-width: 90%; max-height: 80%; border-radius: 12px; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
+        .lbc { position: absolute; top: 30px; right: 30px; color: #fff; font-size: 2rem; cursor: pointer; background: none; border: none; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 1024px) {
             .metrics { grid-template-columns: repeat(2, 1fr); }
             .sidebar { transform: translateX(-100%); }
+            .sidebar.open { transform: translateX(0); }
             .main { margin-left: 0; }
-            .hero h1 { font-size: 2.5rem; }
+            .burger { display: block; }
+            .hero h1 { font-size: 2rem; }
+            .grid-2 { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 600px) {
+            .metrics { grid-template-columns: 1fr; }
+            .met.featured { grid-column: span 1; }
         }
     </style>
 </head>
 <body>
 
+<div class="burger" onclick="toggleSidebar()"><span></span><span></span><span></span></div>
+<div class="lightbox" id="lb" onclick="closeLB()"><button class="lbc">✕</button><img id="lbi" src=""></div>
+
 <aside class="sidebar" id="sidebar">
-    <div class="side-head"><h2>ENGINEERING<br>PORTFOLIO</h2></div>
+    <div class="side-head"><h2>Promotion Pitch</h2></div>
     <nav class="side-nav">
-        <div class="ng">Impact Summary</div>
+        <div class="ng">Overview</div>
         <a href="#hero" class="active">🏠 Summary & Timeline</a>
-        <div class="ng">Revenue Drivers</div>
+        <div class="ng">Core Revenue Drivers</div>
         <a href="#s1">🔄 Dynamic Order Status</a>
-        <a href="#s2">🔔 Pipedream Alerts</a>
+        <a href="#s2">🔔 Pipedream Notifications</a>
         <a href="#s3">⚡ Read Adapter (CQRS)</a>
-        <a href="#s4">📡 Webhook Callbacks</a>
-        <div class="ng">System Stability</div>
-        <a href="#s7">🐛 50+ Production Fixes</a>
-        <a href="#s8">🔧 99% Load Reduction</a>
-        <a href="#s9">💾 Memory Optimization</a>
+        <a href="#s4">📡 Order Callbacks</a>
+        <a href="#s5">🚚 Multi-Shipment ETA</a>
+        <a href="#s6">⚠️ Line Level Risks</a>
+        <div class="ng">Platform Excellence</div>
+        <a href="#s7">🐛 Defect Resolution</a>
+        <a href="#s8">🔧 Pipeline Optimizations</a>
+        <a href="#s9">💾 Memory/DB Fixes</a>
+        <a href="#s10">🔌 API Enhancements</a>
+        <a href="#s11">🔒 Security Remediation</a>
+        <a href="#s12">🗄️ Database Upgrade</a>
+        <div class="ng">Operational Impact</div>
+        <a href="#s13">📈 Service Stability</a>
+        <a href="#s14">🚀 Releases & Onboarding</a>
+        <a href="#s15">🎯 Demo Data Support</a>
+        <a href="#s16">🤝 PO Connect</a>
+        <a href="#s17">📊 Thoughtspot Dashboard</a>
+        <a href="#s18">📅 RDD Configurations</a>
+        <div class="ng">Innovation & Skills</div>
+        <a href="#s19">🤖 AI Productivity</a>
+        <a href="#s20">🏆 Hackathon Win</a>
+        <a href="#s21">🧭 Autonomy</a>
+        <a href="#s22">💻 Tech Proficiency</a>
+        <a href="#s23">🎤 Communication</a>
+        <a href="#s24">✅ Delivery Quality</a>
     </nav>
 </aside>
 
 <main class="main">
     <section class="hero" id="hero">
-        <div class="tag">PROMOTION REVIEW 2025 – 2026</div>
+        <div class="hero-tag">Review Period 2025–2026</div>
         <h1>Shreya Dhanta</h1>
-        <div class="name">Software Engineer | Order Visibility Platform</div>
-        <div class="name" style="opacity: 0.7; font-size: 1rem;">Architecting high-performance supply chain solutions.</div>
+        <p>Software Engineer | Order Visibility Platform @ FourKites</p>
     </section>
 
     <div class="metrics">
         <div class="met featured">
             <div class="lbl">Revenue Impact Enabled</div>
             <div class="num">$2.5M+</div>
-            <p style="font-size: 0.85rem; color: #64748b; margin-top: 10px;">Directly unblocked 3M ($2.1M) and Dollarcity deals via core feature delivery.</p>
+            <p style="font-size: 0.8rem; color: #64748b; margin-top: 10px;">Directly unblocked Dollarcity and 3M global contracts.</p>
         </div>
         <div class="met">
-            <div class="lbl">API Performance</div>
+            <div class="lbl">API Latency</div>
             <div class="num">30s → 4s</div>
-            <p style="font-size: 0.7rem; color: #94a3b8;">7.5x Improvement</p>
+            <p style="font-size: 0.7rem; color: #94a3b8;">7.5x Faster Response</p>
         </div>
         <div class="met">
-            <div class="lbl">System Stability</div>
-            <div class="num">99%</div>
-            <p style="font-size: 0.7rem; color: #94a3b8;">Msg Reduction (Lag Fix)</p>
+            <div class="lbl">Message Lag</div>
+            <div class="num">-99%</div>
+            <p style="font-size: 0.7rem; color: #94a3b8;">Throughput Optimization</p>
         </div>
         <div class="met">
-            <div class="lbl">Code Quality</div>
-            <div class="num">78%</div>
-            <p style="font-size: 0.7rem; color: #94a3b8;">Unit Test Coverage</p>
-        </div>
-        <div class="met">
-            <div class="lbl">Ops Velocity</div>
+            <div class="lbl">Reliability</div>
             <div class="num">50+</div>
-            <p style="font-size: 0.7rem; color: #94a3b8;">Prod Defects Resolved</p>
+            <p style="font-size: 0.7rem; color: #94a3b8;">Production Fixes</p>
+        </div>
+        <div class="met">
+            <div class="lbl">Quality</div>
+            <div class="num">78%</div>
+            <p style="font-size: 0.7rem; color: #94a3b8;">Test Coverage (from 19%)</p>
         </div>
     </div>
 
     <div class="content">
         <section class="section reveal" id="s1">
-            <div class="section-title"><span>🔄</span> Dynamic Order Status</div>
+            <div class="section-title"><span class="si" style="background:var(--pri-l); color:var(--pri)">🔄</span> Dynamic Order Status</div>
             <div class="card">
-                <div class="fb">TOP REVENUE IMPACT</div>
+                <div class="fb">🏆 Key Business Value</div>
+                <div class="ch">
+                    <div>
+                        <h3>Flexible Status Framework</h3>
+                        <span class="ct">Full-Stack Architecture</span>
+                    </div>
+                </div>
                 <ul class="dl">
-                    <li><strong>Custom Architecture</strong> – Replaced rigid static status with an Elasticsearch-backed dynamic system.</li>
-                    <li><strong>Cross-Product Sync</strong> – Integrated Airflow data sync for Order Insights Dashboard consistency.</li>
-                    <li><strong>Customer Success</strong> – Unblocked $2.1M deal for 3M by enabling company-specific status tracking.</li>
+                    <li><strong>Elasticsearch Integration</strong> – Replaced static mapping with dynamic company-specific status lookups.</li>
+                    <li><strong>Cross-Module Support</strong> – Updated Order Listing, Dashboard, and Workspace modules for end-to-end consistency.</li>
+                    <li><strong>Data Engineering</strong> – Configured Airflow sync for Order Insights dynamic tables.</li>
                 </ul>
                 <div class="ib">
-                    <h4>Why it matters:</h4>
-                    <p>Previously, customers were forced into a generic visibility model. My implementation allows global enterprises to map FourKites visibility directly to their internal ERP workflows.</p>
+                    <h4>💰 Business Impact</h4>
+                    <ul>
+                        <li>Unblocked **3M ($2.1M)** and **Dollarcity ($29K)** contract requirements.</li>
+                        <li>Eliminated the "One-size-fits-all" limitation, allowing custom ERP workflows.</li>
+                    </ul>
                 </div>
-                <div class="tix">
-                    <a href="#">OV-5112</a><a href="#">OV-5126</a>
+                <div class="rv">💎 Directly unblocked $2.1M+ Pipeline</div>
+                <div class="tix"><a href="#">OV-5112</a><a href="#">OV-5126</a></div>
+            </div>
+        </section>
+
+        <section class="section reveal" id="s2">
+            <div class="section-title"><span class="si" style="background:var(--acc-l); color:var(--acc)">🔔</span> Pipedream Notifications</div>
+            <div class="card">
+                <ul class="dl">
+                    <li><strong>Real-time Logic</strong> – Event-driven system triggers alerts when `shippedQty < orderedQty`.</li>
+                    <li><strong>Tech Stack</strong> – Utilized Kafka, JPA Entity Listeners, and Caffeine Cache for async processing.</li>
+                </ul>
+                <div class="ib">
+                    <h4>Impact</h4>
+                    <p>Secured the **Lactalis deal ($252K)** by providing proactive shortage visibility.</p>
                 </div>
+                <div class="tix"><a href="#">OV-4536</a><a href="#">OV-4845</a></div>
             </div>
         </section>
 
         <section class="section reveal" id="s3">
-            <div class="section-title"><span>⚡</span> Read Adapter (CQRS)</div>
+            <div class="section-title"><span class="si" style="background:var(--grn-l); color:var(--grn)">⚡</span> Read Adapter (CQRS)</div>
             <div class="card">
-                <div class="fb">SYSTEM PERFORMANCE</div>
+                <div class="fb">7.5x Performance Boost</div>
                 <ul class="dl">
-                    <li><strong>CQRS Pattern</strong> – Spearheaded the separation of Read/Write operations to PostgreSQL replicas.</li>
-                    <li><strong>High Concurrency</strong> – Optimized the system for 500+ concurrent users with 4,000 line items per order.</li>
-                    <li><strong>Reliability</strong> – Implemented a 10K entry Caffeine cache and exponential backoff retry mechanisms.</li>
+                    <li><strong>Architecture</strong> – Implemented CQRS pattern to offload intensive reads to PostgreSQL replicas.</li>
+                    <li><strong>Resiliency</strong> – Added `DataSourceRetryWrapper` with exponential backoff for primary-replica failover.</li>
                 </ul>
                 <div class="ib">
-                    <h4>Impact:</h4>
-                    <p>Reduced API response latency by **86%**, turning a 30-second bottleneck into a sub-4-second seamless experience.</p>
+                    <h4>Performance Results</h4>
+                    <ul>
+                        <li>Response time dropped from **30s to 4s**.</li>
+                        <li>Successfully handled 500+ concurrent users with large order payloads.</li>
+                    </ul>
                 </div>
             </div>
         </section>
 
-        <footer style="text-align: center; padding: 40px; opacity: 0.5; font-size: 0.8rem;">
-            Shreya Dhanta | Software Engineer Promotion Portfolio 2025-2026
+        <section class="section reveal" id="s4">
+            <div class="section-title"><span class="si" style="background:var(--amb-l); color:var(--amb)">📡</span> Callbacks & Integration</div>
+            <div class="grid-2">
+                <div class="compact-card">
+                    <h4>Order Callbacks</h4>
+                    <p>Implemented Protobuf serialization for real-time ERP sync. Unblocked **SCJ ($55K)**.</p>
+                </div>
+                <div class="compact-card">
+                    <h4>Line Risks</h4>
+                    <p>Created line-item granularity for risk tracking, utilizing Chain-of-Responsibility pattern.</p>
+                </div>
+            </div>
+        </section>
+
+        <hr style="border:0; border-top:1px solid var(--g200); margin: 40px 0;">
+
+        <section class="section reveal" id="s7">
+            <div class="section-title"><span class="si" style="background:var(--red-l); color:var(--red)">🐛</span> Stability & Engineering Excellence</div>
+            <div class="card">
+                <h3>50+ Production Defects Resolved</h3>
+                <p style="font-size:0.85rem; color:var(--g600); margin: 10px 0 20px;">Comprehensive cleanup across Kafka, JVM metrics, and Data Sync.</p>
+                <div class="grid-2">
+                    <div class="ib">
+                        <h4>Pipeline Efficiency</h4>
+                        <p>Reduced message volume from **1,000/sec to 10/sec** (99% reduction) by implementing existence checks and risk caching.</p>
+                    </div>
+                    <div class="ib">
+                        <h4>Memory Management</h4>
+                        <p>Fixed `@PostLoad` lazy loading bug that caused DB alerts. Achieved **16+ days with zero database spikes**.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section reveal" id="s19">
+            <div class="section-title"><span>🤖</span> Innovation & Leadership</div>
+            <div class="grid-2">
+                <div class="compact-card">
+                    <h4>AI Productivity</h4>
+                    <p>Built an **AI Code Guardian** for PR analysis, reducing review cycles by 50%.</p>
+                </div>
+                <div class="compact-card">
+                    <h4>Hackathon Winner</h4>
+                    <p>Led automation initiative increasing test coverage from **19% to 78%**.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section reveal" id="s21">
+            <div class="section-title"><span>🧭</span> Core Competencies</div>
+            <div class="card">
+                <div class="grid-2">
+                    <div>
+                        <h4 style="margin-bottom:10px;">Autonomy & Delivery</h4>
+                        <p style="font-size:0.85rem; color:var(--g600);">Successfully managed the **PostgreSQL 13 → 16 migration** for the entire fleet with zero downtime.</p>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom:10px;">Technical Proficiency</h4>
+                        <p style="font-size:0.85rem; color:var(--g600);">Mastery of Java, Spring Boot, Kafka, and complex SQL optimization.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer style="text-align:center; padding: 40px; color:var(--g400); font-size:0.75rem; border-top:1px solid var(--g200);">
+            © 2026 Shreya Dhanta | Promotion Portfolio
         </footer>
     </div>
 </main>
 
 <script>
-    // Reveal on scroll
+    function toggleSidebar() {
+        document.getElementById('sidebar').classList.toggle('open');
+    }
+
+    // Scroll reveal
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
+            if (entry.isIntersecting) entry.target.classList.add('visible');
         });
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // Simple active link tracker
+    // Active link navigation
     window.addEventListener('scroll', () => {
-        let current = '';
-        document.querySelectorAll('section').forEach(section => {
+        let current = "";
+        const sections = document.querySelectorAll("section");
+        const navLi = document.querySelectorAll(".side-nav a");
+        
+        sections.forEach((section) => {
             const sectionTop = section.offsetTop;
-            if (pageYOffset >= sectionTop - 60) {
-                current = section.getAttribute('id');
+            if (pageYOffset >= sectionTop - 100) {
+                current = section.getAttribute("id");
             }
         });
 
-        document.querySelectorAll('.side-nav a').forEach(a => {
-            a.classList.remove('active');
-            if (a.getAttribute('href').includes(current)) {
-                a.classList.add('active');
+        navLi.forEach((a) => {
+            a.classList.remove("active");
+            if (a.getAttribute("href").includes(current)) {
+                a.classList.add("active");
             }
         });
     });
 </script>
-
 </body>
 </html>
