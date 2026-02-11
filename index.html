@@ -128,12 +128,52 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--surface-2);color:
 
 body.presentation .sidebar,body.presentation .sidebar-toggle,body.presentation .theme-toggle,body.presentation .pres-toggle,body.presentation .scroll-progress,body.presentation .progress-dots,body.presentation .top-controls{display:none!important}
 body.presentation .main{margin-left:0!important}
-body.presentation .hero-timeline{min-height:100vh;display:flex;flex-direction:column;justify-content:center}
+body.presentation .hero-timeline{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding-top:0;padding-bottom:0}
+body.presentation .hero-header{padding-top:40px;padding-bottom:20px}
+/* Presentation mode - keep same as normal view */
+body.presentation .scroll-hint{display:none}
 body.presentation .sec{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:40px}
 body.presentation .ctx{max-width:100%;padding:0 60px}
 
-.pres-controls{position:fixed;bottom:0;left:0;right:0;background:var(--surface);padding:16px 24px;display:none;align-items:center;justify-content:space-between;z-index:1000;backdrop-filter:blur(10px);border-top:1px solid var(--border)}
-body.presentation .pres-controls{display:flex}
+/* Hide bottom controls bar in presentation */
+.pres-controls{display:none!important}
+
+/* Side navigation arrows for presentation mode - small arrows on hover */
+.pres-nav-arrow{
+  position:fixed;top:0;bottom:0;
+  width:100px;
+  background:transparent;
+  border:none;cursor:pointer;z-index:1000;
+  display:none;align-items:center;justify-content:center;
+  color:#fff;font-size:1.8rem;font-weight:300
+}
+.pres-nav-arrow span{
+  opacity:0;transition:opacity .3s, transform .3s;
+  background:rgba(0,0,0,0.5);
+  width:44px;height:44px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  backdrop-filter:blur(10px);
+  box-shadow:0 4px 15px rgba(0,0,0,0.3)
+}
+.pres-nav-arrow:hover span{opacity:1}
+.pres-nav-prev{left:0}
+.pres-nav-prev:hover span{transform:translateX(5px)}
+.pres-nav-next{right:0}
+.pres-nav-next:hover span{transform:translateX(-5px)}
+body.presentation .pres-nav-arrow{display:flex}
+
+/* Slide counter in corner */
+.pres-slide-counter{
+  position:fixed;bottom:20px;right:20px;
+  background:rgba(0,0,0,0.5);backdrop-filter:blur(10px);
+  color:#fff;padding:8px 16px;border-radius:20px;
+  font-size:0.85rem;font-weight:600;z-index:1000;
+  display:none;opacity:0;transition:opacity .3s
+}
+body.presentation .pres-slide-counter{display:block;opacity:0.6}
+
+/* Keyboard hint - hidden */
+.pres-key-hint{display:none!important}
 .pres-nav{display:flex;gap:12px}
 .pres-nav button{background:rgba(var(--primary),0.15);border:1px solid rgba(var(--primary),0.25);color:var(--text);padding:10px 20px;border-radius:8px;cursor:pointer;font-weight:600;transition:all .2s}
 .pres-nav button:hover{background:rgba(var(--primary),0.25)}
@@ -143,7 +183,7 @@ body.presentation .pres-controls{display:flex}
 .pres-dot.active{background:rgb(var(--primary));transform:scale(1.3)}
 
 /* Progress Dots (right side) */
-.progress-dots{position:fixed;right:24px;top:50%;transform:translateY(-50%);z-index:400;display:flex;flex-direction:column;gap:12px}
+.progress-dots{display:none}
 .progress-dots a{width:10px;height:10px;border-radius:50%;background:rgba(2,195,154,0.3);transition:all .2s;position:relative}
 .progress-dots a:hover{background:#02C39A;transform:scale(1.2)}
 .progress-dots a.active{background:#02C39A;transform:scale(1.3);box-shadow:0 0 12px rgba(2,195,154,0.6)}
@@ -198,7 +238,88 @@ nav.sn .ng{padding:16px 14px 8px;font-size:.72rem;font-weight:700;text-transform
 .stat-item .label{font-size:.7rem;color:rgba(255,255,255,0.8);text-transform:uppercase;letter-spacing:.5px;margin-top:4px}
 
 /* Timeline Container */
-.timeline-container{flex:1;display:flex;align-items:center;padding:40px 60px 40px 20px;position:relative;z-index:2;overflow-x:auto;overflow-y:hidden}
+.timeline-container{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 60px;position:relative;z-index:2;overflow-x:auto;overflow-y:hidden}
+
+/* 3D Realistic Bubble Cards - Large with Content */
+.summary-cards{display:flex;gap:25px;padding:40px 40px;justify-content:center;flex-wrap:wrap;position:relative;z-index:2}
+.summary-card{
+  width:320px;height:320px;border-radius:50%;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.4) 8%, transparent 20%),
+    radial-gradient(circle at 80% 80%, rgba(255,255,255,0.15) 0%, transparent 25%),
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 0%, rgba(2,195,154,0.15) 50%, rgba(2,128,144,0.25) 100%),
+    radial-gradient(ellipse at 30% 30%, rgba(255,255,255,0.3) 0%, transparent 50%);
+  backdrop-filter:blur(12px);
+  border:1.5px solid rgba(255,255,255,0.4);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  padding:40px 30px;transition:all .4s cubic-bezier(0.4,0,0.2,1);position:relative;
+  box-shadow:
+    0 25px 70px rgba(0,0,0,0.25),
+    0 10px 30px rgba(2,195,154,0.15),
+    inset 0 -30px 60px rgba(0,0,0,0.08),
+    inset 0 30px 60px rgba(255,255,255,0.25),
+    inset 0 0 80px rgba(255,255,255,0.1);
+  cursor:pointer;animation:floatBubble 8s ease-in-out infinite
+}
+.summary-card:nth-child(1){animation-delay:0s}
+.summary-card:nth-child(2){animation-delay:-2s}
+.summary-card:nth-child(3){animation-delay:-4s}
+.summary-card:nth-child(4){animation-delay:-6s}
+@keyframes floatBubble{
+  0%,100%{transform:translateY(0) scale(1)}
+  25%{transform:translateY(-10px) scale(1.01)}
+  50%{transform:translateY(-15px) scale(1)}
+  75%{transform:translateY(-5px) scale(0.99)}
+}
+/* Main top-left highlight */
+.summary-card::before{
+  content:'';position:absolute;top:8%;left:12%;width:45%;height:28%;
+  background:radial-gradient(ellipse 100% 100% at 30% 30%, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.4) 30%, transparent 70%);
+  border-radius:50%;filter:blur(3px);pointer-events:none
+}
+/* Secondary bottom-right reflection */
+.summary-card::after{
+  content:'';position:absolute;bottom:12%;right:12%;width:28%;height:18%;
+  background:radial-gradient(ellipse, rgba(255,255,255,0.3) 0%, transparent 70%);
+  border-radius:50%;filter:blur(4px);pointer-events:none
+}
+.summary-card:hover{
+  transform:scale(1.05) translateY(-10px);
+  box-shadow:
+    0 35px 90px rgba(2,195,154,0.35),
+    0 15px 40px rgba(0,0,0,0.2),
+    inset 0 -30px 60px rgba(0,0,0,0.08),
+    inset 0 30px 60px rgba(255,255,255,0.35),
+    inset 0 0 100px rgba(255,255,255,0.15);
+  border-color:rgba(255,255,255,0.6)
+}
+.summary-icon{font-size:2.2rem;margin-bottom:6px;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.2))}
+.summary-card h3{color:#fff;font-size:0.7rem;font-weight:800;letter-spacing:1px;margin-bottom:8px;text-transform:uppercase;text-shadow:0 2px 8px rgba(0,0,0,0.4)}
+.summary-card .card-list{
+  list-style:none;padding:0;margin:0;text-align:left;width:100%;max-width:220px
+}
+.summary-card .card-list li{
+  color:rgba(255,255,255,0.95);font-size:0.72rem;line-height:1.4;
+  padding:3px 0 3px 14px;position:relative
+}
+.summary-card .card-list li::before{
+  content:'•';position:absolute;left:0;color:#a7f3d0;font-weight:bold
+}
+.summary-footer{
+  color:#a7f3d0;font-size:0.72rem;font-weight:700;margin-top:10px;
+  text-shadow:0 2px 6px rgba(0,0,0,0.3);padding:5px 14px;
+  background:rgba(0,0,0,0.15);border-radius:20px
+}
+[data-theme="dark"] .summary-card{
+  background:
+    radial-gradient(circle at 20% 20%, rgba(94,234,212,0.5) 0%, rgba(94,234,212,0.2) 8%, transparent 20%),
+    radial-gradient(circle at 80% 80%, rgba(94,234,212,0.1) 0%, transparent 25%),
+    radial-gradient(circle at 50% 50%, rgba(20,184,166,0.1) 0%, rgba(6,95,91,0.3) 50%, rgba(4,78,78,0.4) 100%),
+    radial-gradient(ellipse at 30% 30%, rgba(94,234,212,0.2) 0%, transparent 50%);
+  border-color:rgba(94,234,212,0.4)
+}
+[data-theme="dark"] .summary-card::before{background:radial-gradient(ellipse 100% 100% at 30% 30%, rgba(94,234,212,0.7) 0%, rgba(94,234,212,0.3) 30%, transparent 70%)}
+[data-theme="dark"] .summary-card::after{background:radial-gradient(ellipse, rgba(94,234,212,0.2) 0%, transparent 70%)}
 .timeline-container::-webkit-scrollbar{height:8px}
 .timeline-container::-webkit-scrollbar-track{background:rgba(var(--primary),0.1);border-radius:4px}
 .timeline-container::-webkit-scrollbar-thumb{background:rgba(var(--primary),0.3);border-radius:4px}
@@ -360,6 +481,10 @@ nav.sn .ng{padding:16px 14px 8px;font-size:.72rem;font-weight:700;text-transform
   .stats-bar{gap:24px;flex-wrap:wrap}
   .timeline-container{padding:40px 30px}
   .pg,.sg{grid-template-columns:1fr}
+  .summary-cards{gap:20px;padding:40px 20px}
+  .summary-card{width:280px;height:280px;padding:30px 25px}
+  .summary-card .card-list li{font-size:0.68rem}
+  .summary-icon{font-size:1.8rem}
 }
 @media(max-width:1100px){
   .timeline{gap:20px}
@@ -387,6 +512,12 @@ nav.sn .ng{padding:16px 14px 8px;font-size:.72rem;font-weight:700;text-transform
   .ctx{padding:24px 20px 40px}
   .top-controls{top:auto;bottom:16px;right:16px}
   .c-left,.c-right,.c-full,.c-img,.c-tix{padding-left:20px;padding-right:20px}
+  .summary-cards{gap:15px;padding:30px 15px}
+  .summary-card{width:260px;height:260px;padding:25px 20px}
+  .summary-card .card-list li{font-size:0.65rem;padding:2px 0 2px 10px}
+  .summary-card h3{font-size:0.6rem}
+  .summary-icon{font-size:1.6rem;margin-bottom:4px}
+  .summary-footer{font-size:0.6rem;padding:3px 8px}
 }
 </style>
 </head>
@@ -426,16 +557,10 @@ nav.sn .ng{padding:16px 14px 8px;font-size:.72rem;font-weight:700;text-transform
   </button>
 </div>
 
-<!-- Presentation Controls -->
-<div class="pres-controls">
-  <div class="pres-nav">
-    <button onclick="presNav(-1)">← Prev</button>
-    <button onclick="presNav(1)">Next →</button>
-    <button onclick="togglePresentation()">Exit</button>
-  </div>
-  <div class="pres-counter"><span id="presCounter">1</span> / <span id="presTotal">25</span></div>
-  <div class="pres-dots" id="presDots"></div>
-</div>
+<!-- Presentation Navigation Arrows -->
+<button class="pres-nav-arrow pres-nav-prev" onclick="presNav(-1)"><span>&#8249;</span></button>
+<button class="pres-nav-arrow pres-nav-next" onclick="presNav(1)"><span>&#8250;</span></button>
+<div class="pres-slide-counter"><span id="presCounter">1</span> / <span id="presTotal">25</span></div>
 
 <!-- Progress Dots -->
 <div class="progress-dots" id="progressDots"></div>
@@ -502,233 +627,61 @@ nav.sn .ng{padding:16px 14px 8px;font-size:.72rem;font-weight:700;text-transform
   </div>
 
 
-  <div class="timeline-container">
+  <div class="summary-cards">
+    <div class="summary-card">
+      <div class="summary-icon">💎</div>
+      <h3>FEATURE CONTRIBUTIONS</h3>
+      <ul class="card-list">
+        <li>Dynamic Order Status - $2.1M</li>
+        <li>Pipedream Notifications - $252K</li>
+        <li>Read Adapter CQRS - 30s→4s</li>
+        <li>Callbacks System - $55K SCJ</li>
+        <li>Multi-Shipment ETA Logic</li>
+        <li>Line Level Risks Tracking</li>
+      </ul>
+      <div class="summary-footer">6 Major Features</div>
+    </div>
 
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <div class="date">1. Core Feature</div>
-          <h3>Dynamic Order Status</h3>
-          <p>End-to-end customizable order status system across frontend and backend with Elasticsearch support</p>
-          <span class="tag tag-revenue">$2.1M Unblocked</span>
-        </div>
-      </div>
+    <div class="summary-card">
+      <div class="summary-icon">⚙️</div>
+      <h3>ENGINEERING EXCELLENCE</h3>
+      <ul class="card-list">
+        <li>20+ Production Defects Fixed</li>
+        <li>99% Message Volume Reduction</li>
+        <li>@PostLoad Lazy Loading Fix</li>
+        <li>PostgreSQL 13→16 Upgrade</li>
+        <li>API Enhancements & DevPortal</li>
+        <li>Security Remediation</li>
+      </ul>
+      <div class="summary-footer">Platform Stability</div>
+    </div>
 
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <div class="date">2. Core Feature</div>
-          <h3>Pipedream Notifications</h3>
-          <p>Real-time short-shipped alerts with Kafka messaging and event-driven architecture</p>
-          <span class="tag tag-revenue">$252K Deal</span>
-        </div>
-      </div>
+    <div class="summary-card">
+      <div class="summary-icon">🤖</div>
+      <h3>AI & INNOVATION</h3>
+      <ul class="card-list">
+        <li>AI Code Guardian Tool Built</li>
+        <li>60% Faster Code Reviews</li>
+        <li>Hackathon: 19%→78% Coverage</li>
+        <li>Thoughtspot in 1 Week</li>
+        <li>AI-Assisted Development</li>
+        <li>Team AI Adoption Leader</li>
+      </ul>
+      <div class="summary-footer">Team Multiplier</div>
+    </div>
 
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <div class="date">3. Core Feature</div>
-          <h3>Read Adapter (CQRS)</h3>
-          <p>CQRS architecture reducing API response time from 30 seconds to 4 seconds</p>
-          <span class="tag tag-perf">30s → 4s</span>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <div class="date">4. Core Feature</div>
-          <h3>Order Callbacks</h3>
-          <p>Event-driven callbacks for real-time ERP/WMS integration with webhook support</p>
-          <span class="tag tag-revenue">$55K Deal</span>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <div class="date">5. Core Feature</div>
-          <h3>Multi-Shipment ETA</h3>
-          <p>Sophisticated status aggregation across multi-leg shipments with complex logic</p>
-          <span class="tag tag-feature">Complex Feature</span>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <div class="date">6. Core Feature</div>
-          <h3>Line Level Risks</h3>
-          <p>Line-item granularity risk tracking for enterprise clients like SC Johnson</p>
-          <span class="tag tag-revenue">$55K SCJ</span>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <div class="date">7. Platform</div>
-          <h3>20+ Defects Resolved</h3>
-          <p>Technical debt reduction across the entire Order Visibility landscape</p>
-          <span class="tag tag-feature">Stability</span>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <div class="date">8. Platform</div>
-          <h3>Engineering Optimizations</h3>
-          <p>99% message volume reduction in risk pipeline through smart filtering</p>
-          <span class="tag tag-perf">99% Reduction</span>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <div class="date">9. Platform</div>
-          <h3>@PostLoad Fix</h3>
-          <p>Fixed memory issues and lazy loading problems in JPA entity lifecycle</p>
-          <span class="tag tag-perf">Memory Fix</span>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <div class="date">10. Platform</div>
-          <h3>API Enhancements</h3>
-          <p>New REST endpoints and improvements for better client integrations</p>
-          <span class="tag tag-feature">API</span>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <div class="date">11. Platform</div>
-          <h3>Security</h3>
-          <p>Security hardening, vulnerability fixes, and compliance improvements</p>
-          <span class="tag tag-security">Security</span>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <div class="date">12. Platform</div>
-          <h3>PostgreSQL Upgrade</h3>
-          <p>Database version migration with zero downtime deployment strategy</p>
-          <span class="tag tag-perf">DB Upgrade</span>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <div class="date">13. Platform</div>
-          <h3>Stability</h3>
-          <p>System reliability improvements with monitoring and alerting enhancements</p>
-          <span class="tag tag-feature">Reliability</span>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <div class="date">14. Platform</div>
-          <h3>Releases & Onboarding</h3>
-          <p>Deployment automation and streamlined client onboarding processes</p>
-          <span class="tag tag-feature">DevOps</span>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <div class="date">15. Enablement</div>
-          <h3>Demo Data</h3>
-          <p>Sales enablement tooling for effective product demonstrations</p>
-          <span class="tag tag-feature">Sales</span>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <div class="date">16. Enablement</div>
-          <h3>PO Connect</h3>
-          <p>Purchase order integration enabling seamless data synchronization</p>
-          <span class="tag tag-feature">Integration</span>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <div class="date">17. Enablement</div>
-          <h3>Thoughtspot</h3>
-          <p>Analytics dashboard integration for advanced business intelligence</p>
-          <span class="tag tag-feature">Analytics</span>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <div class="date">18. Enablement</div>
-          <h3>Line RDD</h3>
-          <p>Line-level requested delivery date tracking for granular visibility</p>
-          <span class="tag tag-feature">Feature</span>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <div class="date">19. Innovation</div>
-          <h3>AI Productivity</h3>
-          <p>AI-powered PR analysis tool detecting 16 categories, adopted team-wide</p>
-          <span class="tag tag-innovation">50-60% Faster</span>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <div class="date">20. Innovation</div>
-          <h3>Hackathon</h3>
-          <p>Backend test coverage improvement from 19% to 78% in automation sprint</p>
-          <span class="tag tag-innovation">+59% Coverage</span>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <div class="date">21. Competency</div>
-          <h3>Autonomy</h3>
-          <p>Independent problem-solving and ownership of complex features</p>
-          <span class="tag tag-feature">Leadership</span>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <div class="date">22. Competency</div>
-          <h3>Proficiency</h3>
-          <p>Technical expertise in Java, Spring Boot, Kafka, Elasticsearch & more</p>
-          <span class="tag tag-feature">Skills</span>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <div class="date">23. Competency</div>
-          <h3>Presentation & Docs</h3>
-          <p>Clear technical documentation and effective stakeholder communication</p>
-          <span class="tag tag-feature">Docs</span>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <div class="date">24. Competency</div>
-          <h3>Code Quality</h3>
-          <p>High standards for code reviews, testing, and best practices</p>
-          <span class="tag tag-feature">Quality</span>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-card">
-          <div class="date">25. Values</div>
-          <h3>FourKites Values</h3>
-          <p>Embodiment of company values: Customer Focus, Innovation, Teamwork</p>
-          <span class="tag tag-feature">Culture</span>
-        </div>
-      </div>
+    <div class="summary-card">
+      <div class="summary-icon">🏆</div>
+      <h3>LEADERSHIP & VALUES</h3>
+      <ul class="card-list">
+        <li>Customer Obsessed - $2.4M+</li>
+        <li>Extreme Ownership - 20+ Fixes</li>
+        <li>Bias for Action - Fast Delivery</li>
+        <li>One Team - Cross-Team Collab</li>
+        <li>Attitude Matters - 100% On-Time</li>
+        <li>Innovation - AI Pioneer</li>
+      </ul>
+      <div class="summary-footer">5 Core Values</div>
     </div>
   </div>
 
@@ -1570,7 +1523,6 @@ function togglePresentation(){
   if(isPresentation){
     currentSlide=slides.findIndex(s=>document.getElementById(s).getBoundingClientRect().top>=0)||0;
     updatePresCounter();
-    renderPresDots();
     document.getElementById(slides[currentSlide]).scrollIntoView();
     if(document.documentElement.requestFullscreen){
       document.documentElement.requestFullscreen();
@@ -1595,12 +1547,6 @@ function presNav(dir){
 function updatePresCounter(){
   document.getElementById('presCounter').textContent=currentSlide+1;
   document.getElementById('presTotal').textContent=slides.length;
-  document.querySelectorAll('.pres-dot').forEach((d,i)=>d.classList.toggle('active',i===currentSlide));
-}
-
-function renderPresDots(){
-  const dots=document.getElementById('presDots');
-  dots.innerHTML=slides.map((_,i)=>`<div class="pres-dot${i===currentSlide?' active':''}"></div>`).join('');
 }
 
 document.getElementById('presToggle').addEventListener('click',togglePresentation);
